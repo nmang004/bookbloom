@@ -1,0 +1,70 @@
+
+> bookbloom@0.1.0 dev
+> next dev --turbopack
+
+ ⚠ Port 3000 is in use, using available port 3001 instead.
+   ▲ Next.js 15.3.3 (Turbopack)
+   - Local:        http://localhost:3001
+   - Network:      http://192.168.0.112:3001
+
+ ✓ Starting...
+ ✓ Ready in 814ms
+ ○ Compiling /dashboard ...
+Error: Cannot apply unknown utility class `border-border`. Are you using CSS modules or similar and missing `@reference`? https://tailwindcss.com/docs/functions-and-directives#reference-directive
+    [2m[at onInvalidCandidate (/Users/nicholasmangubat/bookbloom/bookbloom/node_modules/tailwindcss/dist/lib.js:18:1312)][0m
+    [2m[at ge (/Users/nicholasmangubat/bookbloom/bookbloom/node_modules/tailwindcss/dist/lib.js:13:29803)][0m
+    [2m[at /Users/nicholasmangubat/bookbloom/bookbloom/node_modules/tailwindcss/dist/lib.js:18:373][0m
+    [2m[at z (/Users/nicholasmangubat/bookbloom/bookbloom/node_modules/tailwindcss/dist/lib.js:3:1656)][0m
+    [2m[at Le (/Users/nicholasmangubat/bookbloom/bookbloom/node_modules/tailwindcss/dist/lib.js:18:172)][0m
+    [2m[at ki (/Users/nicholasmangubat/bookbloom/bookbloom/node_modules/tailwindcss/dist/lib.js:35:780)][0m
+    [2m[at process.processTicksAndRejections (node:internal/process/task_queues:105:5)][0m
+    [2m[at async bi (/Users/nicholasmangubat/bookbloom/bookbloom/node_modules/tailwindcss/dist/lib.js:35:1123)][0m
+    [2m[at async _r (/Users/nicholasmangubat/bookbloom/bookbloom/node_modules/@tailwindcss/node/dist/index.js:10:3384)][0m
+    [2m[at async p (/Users/nicholasmangubat/bookbloom/bookbloom/node_modules/@tailwindcss/postcss/dist/index.js:10:4019)][0m
+ ✓ Compiled /dashboard in 1196ms
+ GET /dashboard 200 in 1421ms
+ GET /dashboard 200 in 91ms
+ ✓ Compiled /favicon.ico in 355ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 601ms
+Error: Cannot apply unknown utility class `border-gray-200`. Are you using CSS modules or similar and missing `@reference`? https://tailwindcss.com/docs/functions-and-directives#reference-directive
+    [2m[at onInvalidCandidate (/Users/nicholasmangubat/bookbloom/bookbloom/node_modules/tailwindcss/dist/lib.js:18:1312)][0m
+    [2m[at ge (/Users/nicholasmangubat/bookbloom/bookbloom/node_modules/tailwindcss/dist/lib.js:13:29803)][0m
+    [2m[at /Users/nicholasmangubat/bookbloom/bookbloom/node_modules/tailwindcss/dist/lib.js:18:373][0m
+    [2m[at z (/Users/nicholasmangubat/bookbloom/bookbloom/node_modules/tailwindcss/dist/lib.js:3:1656)][0m
+    [2m[at Le (/Users/nicholasmangubat/bookbloom/bookbloom/node_modules/tailwindcss/dist/lib.js:18:172)][0m
+    [2m[at ki (/Users/nicholasmangubat/bookbloom/bookbloom/node_modules/tailwindcss/dist/lib.js:35:780)][0m
+    [2m[at process.processTicksAndRejections (node:internal/process/task_queues:105:5)][0m
+    [2m[at async bi (/Users/nicholasmangubat/bookbloom/bookbloom/node_modules/tailwindcss/dist/lib.js:35:1123)][0m
+    [2m[at async _r (/Users/nicholasmangubat/bookbloom/bookbloom/node_modules/@tailwindcss/node/dist/index.js:10:3384)][0m
+    [2m[at async p (/Users/nicholasmangubat/bookbloom/bookbloom/node_modules/@tailwindcss/postcss/dist/index.js:10:4019)][0m
+Error: Cannot apply unknown utility class `from-sakura-main`. Are you using CSS modules or similar and missing `@reference`? https://tailwindcss.com/docs/functions-and-directives#reference-directive
+    [2m[at onInvalidCandidate (/Users/nicholasmangubat/bookbloom/bookbloom/node_modules/tailwindcss/dist/lib.js:18:1312)][0m
+    [2m[at ge (/Users/nicholasmangubat/bookbloom/bookbloom/node_modules/tailwindcss/dist/lib.js:13:29803)][0m
+    [2m[at /Users/nicholasmangubat/bookbloom/bookbloom/node_modules/tailwindcss/dist/lib.js:18:373][0m
+    [2m[at z (/Users/nicholasmangubat/bookbloom/bookbloom/node_modules/tailwindcss/dist/lib.js:3:1656)][0m
+    [2m[at Le (/Users/nicholasmangubat/bookbloom/bookbloom/node_modules/tailwindcss/dist/lib.js:18:172)][0m
+    [2m[at ki (/Users/nicholasmangubat/bookbloom/bookbloom/node_modules/tailwindcss/dist/lib.js:35:780)][0m
+    [2m[at process.processTicksAndRejections (node:internal/process/task_queues:105:5)][0m
+    [2m[at async bi (/Users/nicholasmangubat/bookbloom/bookbloom/node_modules/tailwindcss/dist/lib.js:35:1123)][0m
+    [2m[at async _r (/Users/nicholasmangubat/bookbloom/bookbloom/node_modules/@tailwindcss/node/dist/index.js:10:3384)][0m
+    [2m[at async p (/Users/nicholasmangubat/bookbloom/bookbloom/node_modules/@tailwindcss/postcss/dist/index.js:10:4019)][0m
+Error: Cannot apply unknown utility class `from-pink-400`. Are you using CSS modules or similar and missing `@reference`? https://tailwindcss.com/docs/functions-and-directives#reference-directive
+    [2m[at onInvalidCandidate (/Users/nicholasmangubat/bookbloom/bookbloom/node_modules/tailwindcss/dist/lib.js:18:1312)][0m
+    [2m[at ge (/Users/nicholasmangubat/bookbloom/bookbloom/node_modules/tailwindcss/dist/lib.js:13:29803)][0m
+    [2m[at /Users/nicholasmangubat/bookbloom/bookbloom/node_modules/tailwindcss/dist/lib.js:18:373][0m
+    [2m[at z (/Users/nicholasmangubat/bookbloom/bookbloom/node_modules/tailwindcss/dist/lib.js:3:1656)][0m
+    [2m[at Le (/Users/nicholasmangubat/bookbloom/bookbloom/node_modules/tailwindcss/dist/lib.js:18:172)][0m
+    [2m[at ki (/Users/nicholasmangubat/bookbloom/bookbloom/node_modules/tailwindcss/dist/lib.js:35:780)][0m
+    [2m[at process.processTicksAndRejections (node:internal/process/task_queues:105:5)][0m
+    [2m[at async bi (/Users/nicholasmangubat/bookbloom/bookbloom/node_modules/tailwindcss/dist/lib.js:35:1123)][0m
+    [2m[at async _r (/Users/nicholasmangubat/bookbloom/bookbloom/node_modules/@tailwindcss/node/dist/index.js:10:3384)][0m
+    [2m[at async p (/Users/nicholasmangubat/bookbloom/bookbloom/node_modules/@tailwindcss/postcss/dist/index.js:10:4019)][0m
+ GET /dashboard 200 in 81ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 244ms
+ ○ Compiling / ...
+ ✓ Compiled / in 739ms
+ GET / 200 in 809ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 256ms
+ GET /dashboard 200 in 50ms
+ GET /dashboard 200 in 112ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 407ms

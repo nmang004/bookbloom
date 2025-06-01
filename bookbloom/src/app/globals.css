@@ -2,196 +2,141 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  /* Sakura Pink Tones */
-  --sakura-light: #FFE5E5;
-  --sakura-soft: #FFB7C5;
-  --sakura-main: #FF8FAB;
-  --sakura-deep: #E91E63;
-  --sakura-dark: #AD1457;
-  
-  /* Supporting Colors */
-  --blossom-white: #FEFEFE;
-  --cloud-gray: #F8F9FA;
-  --branch-brown: #8D6E63;
-  --leaf-green: #4CAF50;
-  --sky-blue: #E3F2FD;
-  
-  /* Text Colors */
-  --text-primary: #2D3436;
-  --text-secondary: #636E72;
-  --text-muted: #B2BEC3;
-  
-  /* Design System */
-  --radius-soft: 12px;
-  --radius-gentle: 16px;
-  --radius-bloom: 20px;
-  --shadow-petal: 0 4px 20px rgba(255, 143, 171, 0.1);
-  --shadow-bloom: 0 8px 40px rgba(255, 143, 171, 0.15);
-}
+/* Simple working styles for BookBloom */
 
-@layer base {
-  * {
-    @apply border-border;
-  }
-  
-  body {
-    @apply bg-gradient-to-br from-blossom-white to-sakura-light text-text-primary;
-    font-feature-settings: "rlig" 1, "calt" 1;
-  }
-}
-
-@layer components {
-  .btn-sakura {
-    @apply bg-gradient-to-r from-sakura-main to-sakura-deep text-white font-medium px-6 py-3 rounded-[var(--radius-soft)] shadow-[var(--shadow-petal)] hover:shadow-[var(--shadow-bloom)] transition-all duration-300 hover:scale-105;
-  }
-  
-  .btn-sakura-outline {
-    @apply border-2 border-sakura-main text-sakura-deep bg-transparent font-medium px-6 py-3 rounded-[var(--radius-soft)] hover:bg-sakura-main hover:text-white transition-all duration-300;
-  }
-  
-  .card-sakura {
-    @apply bg-gradient-to-br from-blossom-white to-sakura-light border border-sakura-soft/30 rounded-[var(--radius-gentle)] shadow-[var(--shadow-petal)] hover:shadow-[var(--shadow-bloom)] transition-all duration-300;
-  }
-  
-  .glass-card {
-    @apply bg-sakura-light/70 backdrop-blur-sm border border-sakura-soft/20 rounded-[var(--radius-gentle)] shadow-[var(--shadow-petal)];
-  }
-  
-  .input-sakura {
-    @apply border-2 border-sakura-soft/50 rounded-[var(--radius-soft)] px-4 py-3 bg-blossom-white focus:border-sakura-main focus:ring-2 focus:ring-sakura-main/20 transition-all duration-200;
-  }
-  
-  .progress-sakura {
-    @apply bg-sakura-light rounded-full overflow-hidden;
-  }
-  
-  .progress-sakura-fill {
-    @apply bg-gradient-to-r from-sakura-main to-sakura-deep h-full transition-all duration-500 ease-out;
-  }
-  
-  .badge-sakura {
-    @apply bg-sakura-main/10 text-sakura-dark px-3 py-1 rounded-full text-sm font-medium;
-  }
-  
-  .text-gradient-sakura {
-    @apply bg-gradient-to-r from-sakura-main to-sakura-deep bg-clip-text text-transparent;
-  }
-}
-
-@layer utilities {
-  .bloom-in {
-    animation: bloom-in 0.6s ease-out forwards;
-  }
-  
-  .petal-fall {
-    animation: petal-fall 3s ease-in-out infinite;
-  }
-  
-  .float-gentle {
-    animation: float-gentle 4s ease-in-out infinite;
-  }
-  
-  .pulse-sakura {
-    animation: pulse-sakura 2s ease-in-out infinite;
-  }
-}
-
+/* Keyframe animations */
 @keyframes bloom-in {
-  from {
-    transform: scale(0.8);
-    opacity: 0;
-  }
-  to {
-    transform: scale(1);
-    opacity: 1;
-  }
+  from { transform: scale(0.8); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
 }
 
 @keyframes petal-fall {
-  0% {
-    transform: translateY(-10px) rotate(0deg);
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(100vh) rotate(360deg);
-    opacity: 0;
-  }
+  from { transform: translateY(-10px) rotate(0deg); opacity: 1; }
+  to { transform: translateY(100vh) rotate(360deg); opacity: 0; }
 }
 
 @keyframes float-gentle {
-  0%, 100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
 }
 
-@keyframes pulse-sakura {
-  0%, 100% {
-    box-shadow: 0 0 0 0 rgba(255, 143, 171, 0.4);
-  }
-  50% {
-    box-shadow: 0 0 0 10px rgba(255, 143, 171, 0);
-  }
+/* Animation utility classes */
+.bloom-in { animation: bloom-in 0.6s ease-out forwards; }
+.petal-fall { animation: petal-fall 3s ease-in-out infinite; }
+.float-gentle { animation: float-gentle 4s ease-in-out infinite; }
+
+/* Button styles */
+.btn-sakura {
+  background: linear-gradient(to right, #f472b6, #ec4899);
+  color: white;
+  font-weight: 500;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s;
+  border: none;
+  cursor: pointer;
 }
 
-/* Custom Scrollbars with Sakura Theme */
-@layer base {
-  /* Webkit browsers (Chrome, Safari, Edge) */
-  ::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
-  }
-
-  ::-webkit-scrollbar-track {
-    background: var(--sakura-light);
-    border-radius: 4px;
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background: linear-gradient(to bottom, var(--sakura-main), var(--sakura-deep));
-    border-radius: 4px;
-    border: 1px solid var(--sakura-soft);
-  }
-
-  ::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(to bottom, var(--sakura-deep), var(--sakura-dark));
-  }
-
-  ::-webkit-scrollbar-corner {
-    background: var(--sakura-light);
-  }
-
-  /* Firefox */
-  html {
-    scrollbar-width: thin;
-    scrollbar-color: var(--sakura-main) var(--sakura-light);
-  }
-
-  /* Custom scrollbar for specific containers */
-  .sakura-scrollbar {
-    scrollbar-width: thin;
-    scrollbar-color: var(--sakura-main) var(--sakura-light);
-  }
-
-  .sakura-scrollbar::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
-  }
-
-  .sakura-scrollbar::-webkit-scrollbar-track {
-    background: var(--sakura-light);
-    border-radius: 3px;
-  }
-
-  .sakura-scrollbar::-webkit-scrollbar-thumb {
-    background: var(--sakura-main);
-    border-radius: 3px;
-  }
-
-  .sakura-scrollbar::-webkit-scrollbar-thumb:hover {
-    background: var(--sakura-deep);
-  }
+.btn-sakura:hover {
+  transform: scale(1.05);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
 }
+
+.btn-sakura-outline {
+  border: 2px solid #f472b6;
+  color: #ec4899;
+  background: transparent;
+  font-weight: 500;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.75rem;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+.btn-sakura-outline:hover {
+  background: #f472b6;
+  color: white;
+}
+
+/* Card styles */
+.card-sakura {
+  background: linear-gradient(to bottom right, #ffffff, #fdf2f8);
+  border: 1px solid #fce7f3;
+  border-radius: 1rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s;
+}
+
+.card-sakura:hover {
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+.glass-card {
+  background: rgba(253, 242, 248, 0.7);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(252, 231, 243, 0.2);
+  border-radius: 1rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+/* Progress bars */
+.progress-sakura {
+  background: #fce7f3;
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+.progress-sakura-fill {
+  background: linear-gradient(to right, #f472b6, #ec4899);
+  height: 100%;
+  transition: all 0.5s ease-out;
+}
+
+/* Badges */
+.badge-sakura {
+  background: #fce7f3;
+  color: #be185d;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+/* Text gradient */
+.text-gradient-sakura {
+  background: linear-gradient(to right, #f472b6, #ec4899);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+/* Input styles */
+.input-sakura {
+  border: 2px solid #fce7f3;
+  border-radius: 0.75rem;
+  padding: 0.75rem 1rem;
+  background: white;
+  transition: all 0.2s;
+  width: 100%;
+}
+
+.input-sakura:focus {
+  outline: none;
+  border-color: #f472b6;
+  box-shadow: 0 0 0 3px rgba(244, 114, 182, 0.1);
+}
+
+/* Color variables for components that need them */
+.text-sakura-main { color: #f472b6; }
+.text-sakura-dark { color: #be185d; }
+.text-sakura-deep { color: #ec4899; }
+.bg-sakura-light { background-color: #fce7f3; }
+.bg-sakura-main { background-color: #f472b6; }
+.bg-sakura-deep { background-color: #ec4899; }
+.border-sakura-soft { border-color: #fce7f3; }
+.border-sakura-main { border-color: #f472b6; }
+
+.text-text-primary { color: #1f2937; }
+.text-text-secondary { color: #6b7280; }
+.text-text-muted { color: #9ca3af; }
