@@ -1,4 +1,4 @@
-export type BookStatus = 'planning' | 'generating' | 'completed' | 'error';
+export type BookStatus = 'planning' | 'generating' | 'completed' | 'paused' | 'error';
 export type ChapterStatus = 'pending' | 'generating' | 'completed' | 'error';
 export type WritingStyle = 'narrative' | 'descriptive' | 'conversational' | 'literary' | 'commercial';
 export type Genre = 'fantasy' | 'romance' | 'mystery' | 'sci-fi' | 'thriller' | 'literary' | 'young-adult' | 'horror' | 'historical' | 'contemporary';
@@ -8,19 +8,21 @@ export type POV = 'first-person' | 'second-person' | 'third-person-limited' | 't
 export interface Book {
   id: string;
   title: string;
-  genre: Genre;
+  genre: Genre | string;
   premise: string;
   targetWords: number;
   chaptersCount: number;
-  writingStyle: WritingStyle;
-  tone: Tone;
-  pov: POV;
+  writingStyle: WritingStyle | string;
+  tone: Tone | string;
+  pov: POV | string;
   status: BookStatus;
   createdAt: Date;
   updatedAt?: Date;
   chapters?: Chapter[];
   totalWords?: number;
   completedChapters?: number;
+  progress?: number;
+  coverGradient?: string;
 }
 
 export interface Chapter {
@@ -111,6 +113,16 @@ export interface BookStats {
   completedBooks: number;
   totalWordsGenerated: number;
   averageCompletionTime?: number;
+}
+
+export interface DashboardStats {
+  totalBooks: number;
+  booksInProgress: number;
+  completedBooks: number;
+  totalWordsGenerated: number;
+  booksCreated?: number;
+  totalWords?: number;
+  chaptersCompleted?: number;
 }
 
 export interface UserPreferences {

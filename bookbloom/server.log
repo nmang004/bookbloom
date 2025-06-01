@@ -82,3 +82,22 @@ Error: Cannot apply unknown utility class `from-pink-400`. Are you using CSS mod
  GET /dashboard 200 in 76ms
  GET /favicon.ico?favicon.45db1c09.ico 200 in 882ms
  GET / 200 in 169ms
+   Reload env: .env
+ GET / 200 in 197ms
+ GET /dashboard 200 in 46ms
+ ○ Compiling /dashboard/new ...
+ ✓ Compiled /dashboard/new in 1861ms
+ GET /dashboard/new 200 in 1887ms
+ ⚠ Fast Refresh had to perform a full reload when ./node_modules/.prisma/client/index-browser.js changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+ GET / 200 in 475ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 280ms
+ ✓ Compiled / in 91ms
+ GET / 200 in 300ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 227ms
+ ✓ Compiled / in 17ms
+ GET / 200 in 101ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 224ms
+ GET / 200 in 258ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 243ms
+ GET / 200 in 81ms
+ GET / 200 in 155ms

@@ -156,7 +156,7 @@ export default function Header({ onMenuToggle, isMobileMenuOpen = false }: Heade
                   <div className="absolute right-0 mt-2 w-48 bg-white/90 backdrop-blur-sm rounded-lg shadow-[var(--shadow-bloom)] border border-sakura-soft/30 py-2 z-50">
                     <Link
                       href="/dashboard/settings"
-                      className="flex items-center px-4 py-2 text-sm text-text-secondary hover:text-sakura-main hover:bg-sakura-light/30 transition-colors"
+                      className="flex items-center px-4 py-2 text-sm text-gray-600 hover:text-pink-600 hover:bg-pink-50 transition-colors"
                       onClick={() => setShowUserMenu(false)}
                     >
                       <span className="mr-3">⚙️</span>
@@ -164,7 +164,7 @@ export default function Header({ onMenuToggle, isMobileMenuOpen = false }: Heade
                     </Link>
                     <Link
                       href="/dashboard/profile"
-                      className="flex items-center px-4 py-2 text-sm text-text-secondary hover:text-sakura-main hover:bg-sakura-light/30 transition-colors"
+                      className="flex items-center px-4 py-2 text-sm text-gray-600 hover:text-pink-600 hover:bg-pink-50 transition-colors"
                       onClick={() => setShowUserMenu(false)}
                     >
                       <span className="mr-3">👤</span>

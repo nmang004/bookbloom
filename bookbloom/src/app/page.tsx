@@ -2,16 +2,16 @@ import Link from 'next/link';
 
 export default function LandingPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blossom-white via-sakura-light to-sky-blue">
+    <div className="min-h-screen bg-gradient-to-br from-pink-50 via-rose-50 to-pink-100">
       {/* Header */}
-      <header className="bg-white/80 backdrop-blur-sm border-b border-sakura-soft/30">
+      <header className="bg-white/80 backdrop-blur-sm border-b border-pink-200/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-gradient-to-br from-sakura-main to-sakura-deep rounded-lg flex items-center justify-center">
+              <div className="w-8 h-8 bg-gradient-to-br from-pink-400 to-rose-500 rounded-lg flex items-center justify-center">
                 <span className="text-white font-bold text-lg">🌸</span>
               </div>
-              <span className="text-xl font-bold text-gradient-sakura">
+              <span className="text-xl font-bold bg-gradient-to-r from-pink-400 via-rose-400 to-pink-500 bg-clip-text text-transparent">
                 BookBloom
               </span>
             </div>
@@ -25,72 +25,68 @@ export default function LandingPage() {
 
       {/* Hero Section */}
       <main className="relative">
-        {/* Floating petals animation */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          {[...Array(6)].map((_, i) => (
-            <div
-              key={i}
-              className="absolute text-sakura-main opacity-30 text-2xl petal-fall"
-              style={{
-                left: `${Math.random() * 100}%`,
-                animationDelay: `${Math.random() * 3}s`,
-                animationDuration: `${3 + Math.random() * 2}s`,
-              }}
-            >
-              🌸
-            </div>
-          ))}
-        </div>
+        <section className="relative min-h-[70vh] overflow-hidden">
+          {/* Floating Petals Background */}
+          <div className="absolute inset-0 pointer-events-none">
+            <div className="animate-float-1 absolute top-10 left-10 text-pink-300 text-2xl opacity-60">🌸</div>
+            <div className="animate-float-2 absolute top-20 right-20 text-pink-200 text-xl opacity-50">🌸</div>
+            <div className="animate-float-3 absolute top-40 left-1/3 text-pink-300 text-lg opacity-60">🌸</div>
+            <div className="animate-float-4 absolute top-60 right-1/3 text-pink-200 text-2xl opacity-50">🌸</div>
+            <div className="animate-float-1 absolute bottom-20 left-1/4 text-pink-300 text-xl opacity-40">🌸</div>
+            <div className="animate-float-2 absolute bottom-40 right-1/4 text-pink-200 text-lg opacity-50">🌸</div>
+          </div>
 
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-16">
-          <div className="text-center bloom-in">
-            <h1 className="text-4xl md:text-6xl font-bold text-text-primary mb-6">
-              Transform Ideas into
-              <span className="text-gradient-sakura block">
-                Beautiful Books
+          {/* Content Container */}
+          <div className="relative z-10 container mx-auto px-6 py-20 text-center">
+            {/* Main Heading with Bloom Animation */}
+            <h1 className="text-6xl md:text-7xl lg:text-8xl font-light text-gray-800 mb-6 animate-bloom-in">
+              Welcome to Your
+              <span className="block bg-gradient-to-r from-pink-400 via-rose-400 to-pink-500 bg-clip-text text-transparent font-medium">
+                Story Garden
               </span>
             </h1>
             
-            <p className="text-xl text-text-secondary max-w-3xl mx-auto mb-8 leading-relaxed">
-              BookBloom harnesses the power of AI to help you craft complete novels from simple story ideas. 
-              Watch your creativity blossom into fully-formed books with our intelligent writing assistant.
+            {/* Subtitle with Gentle Fade */}
+            <p className="text-xl md:text-2xl text-gray-600 mb-8 max-w-4xl mx-auto leading-relaxed animate-fade-in-up delay-300">
+              Where ideas blossom into beautiful stories. Watch your creativity bloom into complete novels with the gentle guidance of AI.
             </p>
 
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
-              <Link href="/dashboard" className="btn-sakura text-lg px-8 py-4">
-                Start Creating ✨
+            {/* CTA Buttons */}
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center animate-fade-in-up delay-500">
+              <Link href="/dashboard" className="btn-sakura text-lg px-8 py-4 rounded-2xl font-medium transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl">
+                🌱 Plant Your First Story
               </Link>
-              <Link href="#features" className="btn-sakura-outline text-lg px-8 py-4">
-                Learn More
+              <Link href="#features" className="btn-secondary text-lg px-8 py-4 rounded-2xl font-medium">
+                🌸 Explore the Garden
               </Link>
             </div>
 
-            {/* Stats */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-              <div className="glass-card p-6 text-center">
-                <div className="text-3xl font-bold text-sakura-main mb-2">50K+</div>
-                <div className="text-text-secondary">Words Generated</div>
+            {/* Gentle Stats Preview */}
+            <div className="mt-16 flex flex-wrap justify-center gap-8 text-gray-600">
+              <div className="text-center animate-fade-in-up delay-700">
+                <div className="text-3xl font-light text-pink-500 counter" data-target="50000">50K+</div>
+                <div className="text-sm">Words Bloomed</div>
               </div>
-              <div className="glass-card p-6 text-center">
-                <div className="text-3xl font-bold text-sakura-main mb-2">30min</div>
-                <div className="text-text-secondary">Average Book Time</div>
+              <div className="text-center animate-fade-in-up delay-800">
+                <div className="text-3xl font-light text-pink-500">30min</div>
+                <div className="text-sm">Average Book Time</div>
               </div>
-              <div className="glass-card p-6 text-center">
-                <div className="text-3xl font-bold text-sakura-main mb-2">10+</div>
-                <div className="text-text-secondary">Genres Supported</div>
+              <div className="text-center animate-fade-in-up delay-900">
+                <div className="text-3xl font-light text-pink-500">10+</div>
+                <div className="text-sm">Genres Supported</div>
               </div>
             </div>
           </div>
-        </div>
+        </section>
 
         {/* Features Section */}
-        <section id="features" className="py-20 bg-white/40 backdrop-blur-sm">
+        <section id="features" className="py-20 bg-gradient-to-b from-white to-pink-25">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold text-text-primary mb-4">
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
                 Everything You Need to Write
               </h2>
-              <p className="text-xl text-text-secondary max-w-2xl mx-auto">
+              <p className="text-xl text-gray-600 max-w-2xl mx-auto">
                 From initial concept to published book, BookBloom guides you through every step of the writing process.
               </p>
             </div>
@@ -136,7 +132,7 @@ export default function LandingPage() {
                   <h3 className="text-xl font-semibold text-text-primary mb-3">
                     {feature.title}
                   </h3>
-                  <p className="text-text-secondary">
+                  <p className="text-gray-600">
                     {feature.description}
                   </p>
                 </div>
@@ -146,17 +142,17 @@ export default function LandingPage() {
         </section>
 
         {/* CTA Section */}
-        <section className="py-20">
+        <section className="py-20 bg-gradient-to-b from-white to-pink-25">
           <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
-            <div className="card-sakura p-12">
-              <h2 className="text-3xl md:text-4xl font-bold text-text-primary mb-6">
+            <div className="card-sakura p-12 transform hover:scale-105 transition-all duration-300">
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-6">
                 Ready to Bloom?
               </h2>
-              <p className="text-xl text-text-secondary mb-8">
+              <p className="text-xl text-gray-600 mb-8">
                 Join thousands of writers who have discovered the joy of AI-assisted storytelling.
                 Your next great book is just a few clicks away.
               </p>
-              <Link href="/dashboard" className="btn-sakura text-lg px-8 py-4">
+              <Link href="/dashboard" className="btn-sakura text-lg px-8 py-4 rounded-2xl">
                 Start Writing Today 🌸
               </Link>
             </div>
@@ -165,17 +161,17 @@ export default function LandingPage() {
       </main>
 
       {/* Footer */}
-      <footer className="bg-white/60 backdrop-blur-sm border-t border-sakura-soft/30 py-8">
+      <footer className="bg-white/60 backdrop-blur-sm border-t border-pink-200/30 py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="flex items-center justify-center space-x-2 mb-4">
-            <div className="w-6 h-6 bg-gradient-to-br from-sakura-main to-sakura-deep rounded-lg flex items-center justify-center">
+            <div className="w-6 h-6 bg-gradient-to-br from-pink-400 to-rose-500 rounded-lg flex items-center justify-center">
               <span className="text-white font-bold text-sm">🌸</span>
             </div>
-            <span className="text-lg font-bold text-gradient-sakura">
+            <span className="text-lg font-bold bg-gradient-to-r from-pink-400 via-rose-400 to-pink-500 bg-clip-text text-transparent">
               BookBloom
             </span>
           </div>
-          <p className="text-text-secondary text-sm">
+          <p className="text-gray-600 text-sm">
             © 2024 BookBloom. Crafted with ❤️ for storytellers everywhere.
           </p>
         </div>

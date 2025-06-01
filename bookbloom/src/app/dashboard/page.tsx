@@ -146,7 +146,7 @@ export default function DashboardPage() {
             return (
               <div
                 key={i}
-                className="absolute text-sakura-main/10 text-2xl petal-fall"
+                className="absolute text-pink-300/30 text-2xl petal-fall"
                 style={{
                   left: positions[i].left,
                   top: positions[i].top,
@@ -309,7 +309,7 @@ export default function DashboardPage() {
               {recentBooks.map((book, index) => (
                 <div
                   key={book.id}
-                  className="bloom-in"
+                  className="animate-fade-in-up"
                   style={{ animationDelay: `${0.1 * index}s` }}
                 >
                   <BookPreviewCard
@@ -318,6 +318,22 @@ export default function DashboardPage() {
                   />
                 </div>
               ))}
+              
+              {/* Empty State / New Book Card */}
+              {displayBooks.length < 8 && (
+                <Link
+                  href="/dashboard/new"
+                  className="border-2 border-dashed border-pink-200 rounded-2xl p-8 text-center group cursor-pointer hover:border-pink-300 hover:bg-pink-25 transition-all duration-300 animate-fade-in-up"
+                  style={{ animationDelay: `${0.1 * displayBooks.length}s` }}
+                >
+                  <div className="text-6xl mb-4 group-hover:scale-110 transition-transform duration-300">🌱</div>
+                  <h3 className="text-lg font-medium text-gray-700 mb-2">Plant a New Story</h3>
+                  <p className="text-sm text-gray-500 mb-4">Start your next creative journey</p>
+                  <div className="btn-sakura text-sm px-4 py-2 rounded-lg inline-block">
+                    + Create Book
+                  </div>
+                </Link>
+              )}
             </div>
           ) : (
             <div className="text-center py-16 lg:py-24">
