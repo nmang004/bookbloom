@@ -1,23 +1,21 @@
 [build]
-  # Build command
-  command = "cd bookbloom && npm run build"
+  # Build command - install dependencies first, then build
+  command = "cd bookbloom && npm ci && npm run build"
   
-  # Directory to publish (relative to repo root)
+  # Directory to publish (relative to repo root)  
   publish = "bookbloom/.next"
   
   # Build environment variables
   [build.environment]
     NODE_VERSION = "18"
 
+# Use Netlify's Next.js runtime
 [functions]
-  # Netlify Functions configuration if needed
   directory = "bookbloom/netlify/functions"
 
-# Redirect rules for Next.js
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
+# Next.js specific configuration
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
 
 # Headers for better performance
 [[headers]]
