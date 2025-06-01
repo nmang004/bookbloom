@@ -1,6 +1,6 @@
 [build]
-  # Build command - install dependencies first, then build
-  command = "cd bookbloom && npm ci && npm run build"
+  # Build command - install dependencies, generate Prisma client, then build
+  command = "cd bookbloom && npm ci && npx prisma generate && npm run build"
   
   # Directory to publish (relative to repo root)  
   publish = "bookbloom/.next"
