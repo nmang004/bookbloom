@@ -1,0 +1,113 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Sakura Pink Tones */
+  --sakura-light: #FFE5E5;
+  --sakura-soft: #FFB7C5;
+  --sakura-main: #FF8FAB;
+  --sakura-deep: #E91E63;
+  --sakura-dark: #AD1457;
+  
+  /* Supporting Colors */
+  --blossom-white: #FEFEFE;
+  --cloud-gray: #F8F9FA;
+  --branch-brown: #8D6E63;
+  --leaf-green: #4CAF50;
+  --sky-blue: #E3F2FD;
+  
+  /* Text Colors */
+  --text-primary: #2D3436;
+  --text-secondary: #636E72;
+  --text-muted: #B2BEC3;
+  
+  /* Design System */
+  --radius-soft: 12px;
+  --radius-gentle: 16px;
+  --radius-bloom: 20px;
+  --shadow-petal: 0 4px 20px rgba(255, 143, 171, 0.1);
+  --shadow-bloom: 0 8px 40px rgba(255, 143, 171, 0.15);
+}
+
+/* Sakura Button Styles */
+.btn-sakura {
+  background: linear-gradient(135deg, var(--sakura-main), var(--sakura-deep));
+  color: white;
+  border: none;
+  border-radius: var(--radius-soft);
+  padding: 12px 24px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  box-shadow: var(--shadow-petal);
+}
+
+.btn-sakura:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-bloom);
+}
+
+.btn-secondary {
+  background: rgba(255, 229, 229, 0.8);
+  color: var(--sakura-dark);
+  border: 1px solid var(--sakura-soft);
+  border-radius: var(--radius-soft);
+}
+
+/* Sakura Card Styles */
+.card-sakura {
+  background: linear-gradient(145deg, var(--blossom-white), var(--sakura-light));
+  border: 1px solid rgba(255, 183, 197, 0.3);
+  border-radius: var(--radius-gentle);
+  padding: 24px;
+  box-shadow: var(--shadow-petal);
+  transition: all 0.3s ease;
+}
+
+.card-sakura:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-bloom);
+}
+
+/* Glass Morphism Cards */
+.glass-card {
+  background: rgba(255, 229, 229, 0.7);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 183, 197, 0.2);
+  border-radius: var(--radius-gentle);
+}
+
+/* Input Styles */
+.input-sakura {
+  border: 2px solid var(--sakura-light);
+  border-radius: var(--radius-soft);
+  padding: 12px 16px;
+  background: rgba(255, 229, 229, 0.5);
+  transition: all 0.3s ease;
+}
+
+.input-sakura:focus {
+  border-color: var(--sakura-main);
+  background: var(--blossom-white);
+  box-shadow: 0 0 0 3px rgba(255, 143, 171, 0.1);
+}
+
+/* Animations */
+@keyframes bloom-in {
+  0% { transform: scale(0.8) rotate(-5deg); opacity: 0; }
+  100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+
+@keyframes petal-fall {
+  0% { transform: translateY(-10px) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+}
+
+@keyframes gentle-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+.bloom-in { animation: bloom-in 0.6s ease-out; }
+.petal-fall { animation: petal-fall 3s ease-in-out infinite; }
+.gentle-pulse { animation: gentle-pulse 2s ease-in-out infinite; }
