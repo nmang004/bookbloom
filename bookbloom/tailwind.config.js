@@ -30,12 +30,16 @@ module.exports = {
       boxShadow: {
         'petal': 'var(--shadow-petal)',
         'bloom': 'var(--shadow-bloom)',
+        '3xl': '0 35px 60px -15px rgba(0, 0, 0, 0.3)',
       },
       animation: {
         'bloom-in': 'bloom-in 0.6s ease-out forwards',
         'petal-fall': 'petal-fall 3s ease-in-out infinite',
         'float-gentle': 'float-gentle 4s ease-in-out infinite',
         'pulse-sakura': 'pulse-sakura 2s ease-in-out infinite',
+      },
+      scale: {
+        '102': '1.02',
       },
     },
   },

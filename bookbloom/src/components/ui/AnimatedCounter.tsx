@@ -7,6 +7,8 @@ interface AnimatedCounterProps {
   start?: number;
   duration?: number;
   delay?: number;
+  decimals?: number;
+  suffix?: string;
   className?: string;
 }
 
@@ -15,6 +17,8 @@ export default function AnimatedCounter({
   start = 0, 
   duration = 2000, 
   delay = 0,
+  decimals = 0,
+  suffix = '',
   className = '' 
 }: AnimatedCounterProps) {
   const [count, setCount] = useState(start);
@@ -42,8 +46,8 @@ export default function AnimatedCounter({
       const easeOutCubic = (t: number) => 1 - Math.pow(1 - t, 3);
       const easedProgress = easeOutCubic(progress);
       
-      const currentCount = Math.floor(start + difference * easedProgress);
-      setCount(currentCount);
+      const currentCount = start + difference * easedProgress;
+      setCount(decimals > 0 ? parseFloat(currentCount.toFixed(decimals)) : Math.floor(currentCount));
 
       if (progress < 1) {
         requestAnimationFrame(updateCount);
@@ -58,7 +62,10 @@ export default function AnimatedCounter({
 
   return (
     <span className={`tabular-nums ${className}`}>
-      {count.toLocaleString()}
+      {count.toLocaleString(undefined, { 
+        minimumFractionDigits: decimals,
+        maximumFractionDigits: decimals 
+      })}{suffix}
     </span>
   );
 }

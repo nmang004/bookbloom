@@ -23,16 +23,12 @@ export default function Layout({
   // Handle responsive behavior
   useEffect(() => {
     const handleResize = () => {
-      const mobile = window.innerWidth < 768;
+      const mobile = window.innerWidth < 1024;
       setIsMobile(mobile);
       
       // Auto-close sidebar on mobile when resizing
       if (mobile && sidebarOpen) {
         setSidebarOpen(false);
-      }
-      // Auto-open sidebar on desktop
-      else if (!mobile && showSidebar) {
-        setSidebarOpen(true);
       }
     };
 
@@ -71,7 +67,7 @@ export default function Layout({
         {/* Mobile Overlay */}
         {isMobile && sidebarOpen && (
           <div 
-            className="fixed inset-0 bg-black/20 backdrop-blur-sm z-30 md:hidden"
+            className="fixed inset-0 bg-black/20 backdrop-blur-sm z-30 lg:hidden"
             onClick={handleOverlayClick}
           />
         )}
@@ -80,7 +76,7 @@ export default function Layout({
         {showSidebar && (
           <>
             {/* Desktop Sidebar */}
-            <div className="hidden md:block">
+            <div className="hidden lg:block w-64 xl:w-72 flex-shrink-0">
               <Sidebar 
                 isOpen={true}
                 onClose={() => setSidebarOpen(false)}
@@ -89,7 +85,7 @@ export default function Layout({
             
             {/* Mobile Sidebar */}
             <div className={`
-              fixed top-16 left-0 bottom-0 z-40 md:hidden
+              fixed top-16 left-0 bottom-0 z-40 lg:hidden
               transform transition-transform duration-300 ease-out
               ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}
             `}>
@@ -103,15 +99,14 @@ export default function Layout({
         )}
         
         {/* Main Content */}
-        <main className={`
-          flex-1 relative
+        <main className="
+          flex-1 relative overflow-x-hidden
           transition-all duration-300 ease-out
-          ${showSidebar && !isMobile ? 'ml-0' : ''}
-        `}>
+        ">
           {/* Content Container */}
           <div className={`
             ${maxWidthClasses[maxWidth]} mx-auto
-            p-4 sm:p-6 lg:p-8
+            px-4 sm:px-6 lg:px-8 py-6 lg:py-8
             min-h-full
           `}>
             {/* Content Wrapper with Japanese Minimalism */}
