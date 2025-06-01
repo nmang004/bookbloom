@@ -18,6 +18,7 @@ export default function BookCard({ book, onDelete, onEdit }: BookCardProps) {
     planning: 'text-blue-600 bg-blue-100',
     generating: 'text-yellow-600 bg-yellow-100',
     completed: 'text-green-600 bg-green-100',
+    paused: 'text-gray-600 bg-gray-100',
     error: 'text-red-600 bg-red-100',
   }[book.status];
 
@@ -25,6 +26,7 @@ export default function BookCard({ book, onDelete, onEdit }: BookCardProps) {
     planning: '📝',
     generating: '⚡',
     completed: '✅',
+    paused: '⏸️',
     error: '❌',
   }[book.status];
 

@@ -226,10 +226,10 @@ export function validateTargetWordsDistribution(
 }
 
 // Error message helpers
-export function getValidationErrors(result: { success: boolean; error?: any }) {
+export function getValidationErrors(result: { success: boolean; error?: { issues?: { path: string[]; message: string }[] } }) {
   if (result.success) return [];
   
-  return result.error?.issues?.map((issue: any) => ({
+  return result.error?.issues?.map((issue: { path: string[]; message: string }) => ({
     field: issue.path.join('.'),
     message: issue.message,
   })) || [];

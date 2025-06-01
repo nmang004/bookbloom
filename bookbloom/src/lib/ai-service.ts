@@ -3,7 +3,6 @@ import {
   AIGenerationResponse, 
   WritingStyle, 
   Tone, 
-  POV, 
   Genre 
 } from '@/types';
 

@@ -1,19 +1,15 @@
 'use client';
 
-import Link from 'next/link';
 import { Book } from '@/types';
-import { formatWordCount, getGenreEmoji, formatTimeAgo } from '@/lib/utils';
+import { formatWordCount, getGenreEmoji } from '@/lib/utils';
 
 interface BookPreviewCardProps {
   book: Book;
   onDelete?: (id: string) => void;
-  showActions?: boolean;
 }
 
 export default function BookPreviewCard({ 
-  book, 
-  onDelete, 
-  showActions = true 
+  book
 }: BookPreviewCardProps) {
   const progress = book.completedChapters && book.chaptersCount 
     ? (book.completedChapters / book.chaptersCount) * 100 
@@ -35,6 +31,11 @@ export default function BookPreviewCard({
       icon: '✓',
       label: 'Complete',
     },
+    paused: {
+      color: 'text-gray-800 bg-gray-100',
+      icon: '⏸️',
+      label: 'Paused',
+    },
     error: {
       color: 'text-red-800 bg-red-100',
       icon: '❌',
@@ -53,9 +54,9 @@ export default function BookPreviewCard({
     default: 'from-pink-200 to-rose-300',
   };
 
-  const coverGradient = genreGradients[book.genre] || genreGradients.default;
+  const coverGradient = genreGradients[book.genre as keyof typeof genreGradients] || genreGradients.default;
 
-  const status = statusConfig[book.status];
+  const status = statusConfig[book.status as keyof typeof statusConfig];
 
   return (
     <div className="card-sakura group cursor-pointer transform hover:scale-105 transition-all duration-300">

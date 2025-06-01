@@ -201,7 +201,7 @@ export default function Sidebar({ isOpen = true, onClose, className = '' }: Side
                 Daily Inspiration
               </h4>
               <p className="text-xs text-text-secondary leading-relaxed">
-                "Every story you create is a cherry blossom in the garden of imagination. Let them bloom."
+                &ldquo;Every story you create is a cherry blossom in the garden of imagination. Let them bloom.&rdquo;
               </p>
             </div>
           </div>

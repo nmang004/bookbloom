@@ -70,7 +70,7 @@ export default function NewBookPage() {
             Create New Book ✨
           </h1>
           <p className="text-text-secondary">
-            Let's bring your story idea to life, one step at a time.
+            Let&apos;s bring your story idea to life, one step at a time.
           </p>
         </div>
 
@@ -181,7 +181,7 @@ export default function NewBookPage() {
                 Review Your Book
               </h2>
               <p className="text-text-secondary">
-                Everything looks good? Let's create your book and start the magic!
+                Everything looks good? Let&apos;s create your book and start the magic!
               </p>
             </div>
 

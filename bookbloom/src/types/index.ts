@@ -13,8 +13,8 @@ export interface Book {
   targetWords: number;
   chaptersCount: number;
   writingStyle: WritingStyle | string;
-  tone: Tone | string;
-  pov: POV | string;
+  tone: Tone | string | null;
+  pov: POV | string | null;
   status: BookStatus;
   createdAt: Date;
   updatedAt?: Date;

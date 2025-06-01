@@ -1,6 +1,7 @@
 import { PrismaClient } from '@prisma/client'
 
 declare global {
+  // eslint-disable-next-line no-var
   var prisma: PrismaClient | undefined
 }
 
@@ -35,8 +36,8 @@ export const db = {
     findMany: async (options?: {
       skip?: number
       take?: number
-      where?: any
-      orderBy?: any
+      where?: object
+      orderBy?: object
     }) => {
       return await prisma.book.findMany({
         ...options,
@@ -63,7 +64,7 @@ export const db = {
       })
     },
 
-    update: async (id: string, data: any) => {
+    update: async (id: string, data: object) => {
       return await prisma.book.update({
         where: { id },
         data,
@@ -113,7 +114,7 @@ export const db = {
       })
     },
 
-    update: async (id: string, data: any) => {
+    update: async (id: string, data: object) => {
       return await prisma.chapter.update({
         where: { id },
         data,
@@ -164,8 +165,8 @@ export const db = {
       return {
         totalBooks,
         completedBooks,
-        inProgressBooks,
-        totalWords: totalWords._sum.wordCount || 0,
+        booksInProgress: inProgressBooks,
+        totalWordsGenerated: totalWords._sum.wordCount || 0,
       }
     },
   },

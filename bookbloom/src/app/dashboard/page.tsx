@@ -6,7 +6,7 @@ import Layout from '@/components/layout/Layout';
 import AnimatedCounter from '@/components/ui/AnimatedCounter';
 import BookPreviewCard from '@/components/book/BookPreviewCard';
 import { useBookStore } from '@/stores/book-store';
-import { formatWordCount, getGenreEmoji } from '@/lib/utils';
+import { formatWordCount } from '@/lib/utils';
 import { Book } from '@/types';
 
 // Mock data for demonstration
@@ -196,7 +196,7 @@ export default function DashboardPage() {
             </div>
 
             {/* Achievement Badge */}
-            {displayStats.totalWords > 50000 && (
+            {displayStats.totalWordsGenerated > 50000 && (
               <div className="inline-flex items-center gap-2 bg-gradient-to-r from-yellow-100 to-orange-100 text-orange-800 px-4 py-2 rounded-full text-sm font-medium">
                 <span>🏆</span>
                 Prolific Writer - {formatWordCount(displayStats.totalWordsGenerated)} words cultivated!
@@ -357,7 +357,7 @@ export default function DashboardPage() {
           <div className="bg-gradient-to-r from-sakura-light via-sky-blue/30 to-sakura-soft rounded-2xl p-8 lg:p-12 text-center border border-sakura-soft/30">
             <div className="text-4xl lg:text-5xl mb-4">🌸</div>
             <blockquote className="text-lg lg:text-xl text-text-primary font-medium mb-4 italic">
-              "Every story is a garden. Every word is a seed. Every chapter is a season of growth."
+              &ldquo;Every story is a garden. Every word is a seed. Every chapter is a season of growth.&rdquo;
             </blockquote>
             <div className="text-text-secondary text-sm">
               - BookBloom Philosophy

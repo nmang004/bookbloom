@@ -34,7 +34,7 @@ export default function GenerationProgress({ status, bookTitle }: GenerationProg
       <div className="flex items-center justify-between mb-6">
         <div>
           <h2 className="text-xl font-bold text-text-primary mb-1">
-            Generating "{bookTitle}"
+            Generating &ldquo;{bookTitle}&rdquo;
           </h2>
           <p className="text-text-secondary">
             {isGenerating ? 'AI is crafting your story...' : 'Generation paused'}

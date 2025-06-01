@@ -5,7 +5,7 @@ import Link from 'next/link';
 import Layout from '@/components/layout/Layout';
 import BookCard from '@/components/book/BookCard';
 import { useBookStore } from '@/stores/book-store';
-import { Book, Genre, BookStatus } from '@/types';
+import { Genre, BookStatus } from '@/types';
 
 export default function BooksPage() {
   const { 
@@ -160,7 +160,7 @@ export default function BooksPage() {
               </label>
               <select
                 value={sortBy}
-                onChange={(e) => setSortBy(e.target.value as any)}
+                onChange={(e) => setSortBy(e.target.value as 'newest' | 'oldest' | 'title' | 'progress')}
                 className="input-sakura w-full"
               >
                 <option value="newest">Newest First</option>

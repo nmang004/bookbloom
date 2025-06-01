@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { devtools, persist } from 'zustand/middleware';
-import { Book, Chapter, GenerationStatus, BookStats } from '@/types';
+import { Book, Chapter, GenerationStatus, BookStats, BookFormData } from '@/types';
 import { db } from '@/lib/db';
 
 interface BookStore {
@@ -16,7 +16,7 @@ interface BookStore {
   // Actions
   fetchBooks: () => Promise<void>;
   fetchBook: (id: string) => Promise<void>;
-  createBook: (bookData: any) => Promise<Book | null>;
+  createBook: (bookData: BookFormData) => Promise<Book | null>;
   updateBook: (id: string, updates: Partial<Book>) => Promise<void>;
   deleteBook: (id: string) => Promise<void>;
   
@@ -56,8 +56,8 @@ export const useBookStore = create<BookStore>()(
         fetchBooks: async () => {
           set({ isLoading: true, error: null });
           try {
-            const books = await db.getBooks();
-            set({ books, isLoading: false });
+            const books = await db.book.findMany();
+            set({ books: books as Book[], isLoading: false });
           } catch (error) {
             set({ 
               error: error instanceof Error ? error.message : 'Failed to fetch books',
@@ -69,9 +69,9 @@ export const useBookStore = create<BookStore>()(
         fetchBook: async (id: string) => {
           set({ isLoading: true, error: null });
           try {
-            const book = await db.getBook(id);
+            const book = await db.book.findUnique(id);
             if (book) {
-              set({ currentBook: book, chapters: book.chapters || [], isLoading: false });
+              set({ currentBook: book as Book, chapters: (book.chapters as Chapter[]) || [], isLoading: false });
             } else {
               set({ error: 'Book not found', isLoading: false });
             }
@@ -83,13 +83,13 @@ export const useBookStore = create<BookStore>()(
           }
         },
 
-        createBook: async (bookData: any) => {
+        createBook: async (bookData: BookFormData) => {
           set({ isLoading: true, error: null });
           try {
-            const newBook = await db.createBook(bookData);
-            const books = await db.getBooks();
-            set({ books, currentBook: newBook, isLoading: false });
-            return newBook;
+            const newBook = await db.book.create(bookData);
+            const books = await db.book.findMany();
+            set({ books: books as Book[], currentBook: newBook as Book, isLoading: false });
+            return newBook as Book;
           } catch (error) {
             set({ 
               error: error instanceof Error ? error.message : 'Failed to create book',
@@ -102,12 +102,12 @@ export const useBookStore = create<BookStore>()(
         updateBook: async (id: string, updates: Partial<Book>) => {
           set({ isLoading: true, error: null });
           try {
-            const updatedBook = await db.updateBook(id, updates);
+            const updatedBook = await db.book.update(id, updates);
             if (updatedBook) {
-              const books = await db.getBooks();
+              const books = await db.book.findMany();
               set({ 
-                books,
-                currentBook: get().currentBook?.id === id ? updatedBook : get().currentBook,
+                books: books as Book[],
+                currentBook: get().currentBook?.id === id ? (updatedBook as Book) : get().currentBook,
                 isLoading: false 
               });
             } else {
@@ -124,11 +124,11 @@ export const useBookStore = create<BookStore>()(
         deleteBook: async (id: string) => {
           set({ isLoading: true, error: null });
           try {
-            const success = await db.deleteBook(id);
+            await db.book.delete(id); const success = true;
             if (success) {
-              const books = await db.getBooks();
+              const books = await db.book.findMany();
               set({ 
-                books,
+                books: books as Book[],
                 currentBook: get().currentBook?.id === id ? null : get().currentBook,
                 isLoading: false 
               });
@@ -146,8 +146,8 @@ export const useBookStore = create<BookStore>()(
         fetchChapters: async (bookId: string) => {
           set({ isLoading: true, error: null });
           try {
-            const chapters = await db.getChaptersByBookId(bookId);
-            set({ chapters, isLoading: false });
+            const chapters = await db.chapter.findMany(bookId);
+            set({ chapters: chapters as Chapter[], isLoading: false });
           } catch (error) {
             set({ 
               error: error instanceof Error ? error.message : 'Failed to fetch chapters',
@@ -159,12 +159,12 @@ export const useBookStore = create<BookStore>()(
         updateChapter: async (id: string, updates: Partial<Chapter>) => {
           set({ isLoading: true, error: null });
           try {
-            const updatedChapter = await db.updateChapter(id, updates);
+            const updatedChapter = await db.chapter.update(id, updates);
             if (updatedChapter) {
               const chapters = get().chapters.map(chapter =>
-                chapter.id === id ? updatedChapter : chapter
+                chapter.id === id ? (updatedChapter as Chapter) : chapter
               );
-              set({ chapters, isLoading: false });
+              set({ chapters: chapters as Chapter[], isLoading: false });
               
               // Update current book stats if it's loaded
               const currentBook = get().currentBook;
@@ -194,8 +194,8 @@ export const useBookStore = create<BookStore>()(
         startGeneration: async (bookId: string) => {
           set({ isLoading: true, error: null });
           try {
-            await db.updateBook(bookId, { status: 'generating' });
-            const chapters = await db.getChaptersByBookId(bookId);
+            await db.book.update(bookId, { status: 'generating' });
+            const chapters = await db.chapter.findMany(bookId);
             const pendingChapters = chapters.filter(c => c.status === 'pending');
             
             if (pendingChapters.length === 0) {
@@ -240,7 +240,7 @@ export const useBookStore = create<BookStore>()(
 
         fetchStats: async () => {
           try {
-            const stats = await db.getStats();
+            const stats = await db.stats.getBookStats();
             set({ stats });
           } catch (error) {
             console.error('Failed to fetch stats:', error);
