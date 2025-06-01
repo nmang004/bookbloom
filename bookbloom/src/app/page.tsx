@@ -1,102 +1,184 @@
-import Image from "next/image";
+import Link from 'next/link';
 
-export default function Home() {
+export default function LandingPage() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <div className="min-h-screen bg-gradient-to-br from-blossom-white via-sakura-light to-sky-blue">
+      {/* Header */}
+      <header className="bg-white/80 backdrop-blur-sm border-b border-sakura-soft/30">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16">
+            <div className="flex items-center space-x-2">
+              <div className="w-8 h-8 bg-gradient-to-br from-sakura-main to-sakura-deep rounded-lg flex items-center justify-center">
+                <span className="text-white font-bold text-lg">🌸</span>
+              </div>
+              <span className="text-xl font-bold text-gradient-sakura">
+                BookBloom
+              </span>
+            </div>
+            
+            <Link href="/dashboard" className="btn-sakura">
+              Get Started
+            </Link>
+          </div>
         </div>
+      </header>
+
+      {/* Hero Section */}
+      <main className="relative">
+        {/* Floating petals animation */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          {[...Array(6)].map((_, i) => (
+            <div
+              key={i}
+              className="absolute text-sakura-main opacity-30 text-2xl petal-fall"
+              style={{
+                left: `${Math.random() * 100}%`,
+                animationDelay: `${Math.random() * 3}s`,
+                animationDuration: `${3 + Math.random() * 2}s`,
+              }}
+            >
+              🌸
+            </div>
+          ))}
+        </div>
+
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-16">
+          <div className="text-center bloom-in">
+            <h1 className="text-4xl md:text-6xl font-bold text-text-primary mb-6">
+              Transform Ideas into
+              <span className="text-gradient-sakura block">
+                Beautiful Books
+              </span>
+            </h1>
+            
+            <p className="text-xl text-text-secondary max-w-3xl mx-auto mb-8 leading-relaxed">
+              BookBloom harnesses the power of AI to help you craft complete novels from simple story ideas. 
+              Watch your creativity blossom into fully-formed books with our intelligent writing assistant.
+            </p>
+
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
+              <Link href="/dashboard" className="btn-sakura text-lg px-8 py-4">
+                Start Creating ✨
+              </Link>
+              <Link href="#features" className="btn-sakura-outline text-lg px-8 py-4">
+                Learn More
+              </Link>
+            </div>
+
+            {/* Stats */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+              <div className="glass-card p-6 text-center">
+                <div className="text-3xl font-bold text-sakura-main mb-2">50K+</div>
+                <div className="text-text-secondary">Words Generated</div>
+              </div>
+              <div className="glass-card p-6 text-center">
+                <div className="text-3xl font-bold text-sakura-main mb-2">30min</div>
+                <div className="text-text-secondary">Average Book Time</div>
+              </div>
+              <div className="glass-card p-6 text-center">
+                <div className="text-3xl font-bold text-sakura-main mb-2">10+</div>
+                <div className="text-text-secondary">Genres Supported</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Features Section */}
+        <section id="features" className="py-20 bg-white/40 backdrop-blur-sm">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl md:text-4xl font-bold text-text-primary mb-4">
+                Everything You Need to Write
+              </h2>
+              <p className="text-xl text-text-secondary max-w-2xl mx-auto">
+                From initial concept to published book, BookBloom guides you through every step of the writing process.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {[
+                {
+                  icon: '📝',
+                  title: 'Smart Planning',
+                  description: 'Create detailed outlines with our intuitive planning wizard that helps structure your story.',
+                },
+                {
+                  icon: '🤖',
+                  title: 'AI Generation',
+                  description: 'Powerful AI writes engaging chapters while maintaining your unique voice and style.',
+                },
+                {
+                  icon: '📊',
+                  title: 'Progress Tracking',
+                  description: 'Monitor word counts, chapter completion, and estimated time to finish your book.',
+                },
+                {
+                  icon: '🎨',
+                  title: 'Multiple Formats',
+                  description: 'Export your finished book as PDF, DOCX, or plain text with professional formatting.',
+                },
+                {
+                  icon: '✏️',
+                  title: 'Easy Editing',
+                  description: 'Edit and refine generated content with our built-in editor and regeneration tools.',
+                },
+                {
+                  icon: '📚',
+                  title: 'Genre Variety',
+                  description: 'Support for fantasy, romance, mystery, sci-fi, and many other popular genres.',
+                },
+              ].map((feature, index) => (
+                <div
+                  key={index}
+                  className="card-sakura p-6 text-center hover:scale-105 transition-all duration-300"
+                >
+                  <div className="text-4xl mb-4">{feature.icon}</div>
+                  <h3 className="text-xl font-semibold text-text-primary mb-3">
+                    {feature.title}
+                  </h3>
+                  <p className="text-text-secondary">
+                    {feature.description}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* CTA Section */}
+        <section className="py-20">
+          <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
+            <div className="card-sakura p-12">
+              <h2 className="text-3xl md:text-4xl font-bold text-text-primary mb-6">
+                Ready to Bloom?
+              </h2>
+              <p className="text-xl text-text-secondary mb-8">
+                Join thousands of writers who have discovered the joy of AI-assisted storytelling.
+                Your next great book is just a few clicks away.
+              </p>
+              <Link href="/dashboard" className="btn-sakura text-lg px-8 py-4">
+                Start Writing Today 🌸
+              </Link>
+            </div>
+          </div>
+        </section>
       </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+
+      {/* Footer */}
+      <footer className="bg-white/60 backdrop-blur-sm border-t border-sakura-soft/30 py-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <div className="flex items-center justify-center space-x-2 mb-4">
+            <div className="w-6 h-6 bg-gradient-to-br from-sakura-main to-sakura-deep rounded-lg flex items-center justify-center">
+              <span className="text-white font-bold text-sm">🌸</span>
+            </div>
+            <span className="text-lg font-bold text-gradient-sakura">
+              BookBloom
+            </span>
+          </div>
+          <p className="text-text-secondary text-sm">
+            © 2024 BookBloom. Crafted with ❤️ for storytellers everywhere.
+          </p>
+        </div>
       </footer>
     </div>
   );
