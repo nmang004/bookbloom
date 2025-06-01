@@ -101,3 +101,6 @@ Error: Cannot apply unknown utility class `from-pink-400`. Are you using CSS mod
  GET /favicon.ico?favicon.45db1c09.ico 200 in 243ms
  GET / 200 in 81ms
  GET / 200 in 155ms
+ GET / 200 in 138ms
+ GET /favicon.ico?favicon.45db1c09.ico 200 in 257ms
+[?25h
