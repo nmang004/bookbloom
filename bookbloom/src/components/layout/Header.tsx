@@ -17,20 +17,34 @@ export default function Header({ onMenuToggle, isMobileMenuOpen = false }: Heade
     <>
       {/* Floating Petals Animation */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none z-10">
-        {[...Array(8)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute text-sakura-main/20 text-lg float-gentle"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 4}s`,
-              animationDuration: `${4 + Math.random() * 2}s`,
-            }}
-          >
-            🌸
-          </div>
-        ))}
+        {[...Array(8)].map((_, i) => {
+          // Use deterministic values based on index
+          const positions = [
+            { left: '10%', top: '20%' },
+            { left: '25%', top: '60%' },
+            { left: '40%', top: '30%' },
+            { left: '55%', top: '70%' },
+            { left: '70%', top: '15%' },
+            { left: '85%', top: '50%' },
+            { left: '15%', top: '85%' },
+            { left: '60%', top: '40%' }
+          ];
+          
+          return (
+            <div
+              key={i}
+              className="absolute text-sakura-main/20 text-lg float-gentle"
+              style={{
+                left: positions[i].left,
+                top: positions[i].top,
+                animationDelay: `${i * 0.5}s`,
+                animationDuration: `${4 + (i % 3)}s`
+              }}
+            >
+              🌸
+            </div>
+          );
+        })}
       </div>
 
       <header className="bg-gradient-to-r from-sakura-light via-sakura-soft to-sakura-light backdrop-blur-sm border-b border-sakura-main/20 sticky top-0 z-50 shadow-[var(--shadow-petal)]">

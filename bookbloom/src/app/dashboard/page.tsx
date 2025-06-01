@@ -126,20 +126,38 @@ export default function DashboardPage() {
       <div className="space-y-8 lg:space-y-12">
         {/* Floating Petals Background */}
         <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
-          {[...Array(12)].map((_, i) => (
-            <div
-              key={i}
-              className="absolute text-sakura-main/10 text-2xl petal-fall"
-              style={{
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
-                animationDelay: `${Math.random() * 8}s`,
-                animationDuration: `${8 + Math.random() * 4}s`,
-              }}
-            >
-              🌸
-            </div>
-          ))}
+          {[...Array(12)].map((_, i) => {
+            // Use deterministic values based on index
+            const positions = [
+              { left: '5%', top: '15%' },
+              { left: '15%', top: '45%' },
+              { left: '25%', top: '75%' },
+              { left: '35%', top: '25%' },
+              { left: '45%', top: '60%' },
+              { left: '55%', top: '35%' },
+              { left: '65%', top: '80%' },
+              { left: '75%', top: '20%' },
+              { left: '85%', top: '55%' },
+              { left: '10%', top: '90%' },
+              { left: '90%', top: '40%' },
+              { left: '50%', top: '10%' }
+            ];
+            
+            return (
+              <div
+                key={i}
+                className="absolute text-sakura-main/10 text-2xl petal-fall"
+                style={{
+                  left: positions[i].left,
+                  top: positions[i].top,
+                  animationDelay: `${i * 0.7}s`,
+                  animationDuration: `${8 + (i % 4)}s`
+                }}
+              >
+                🌸
+              </div>
+            );
+          })}
         </div>
 
         {/* Hero Section */}
