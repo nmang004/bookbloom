@@ -12,7 +12,7 @@ export default function LandingPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blossom-white via-sakura-light/30 to-sky-blue/20 overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-blossom-white via-sakura-light/30 to-sky-blue/20">
       {/* Animated Petals Background Layer */}
       <div className="fixed inset-0 pointer-events-none">
         {[...Array(20)].map((_, i) => (

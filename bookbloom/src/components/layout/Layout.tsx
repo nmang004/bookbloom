@@ -76,11 +76,13 @@ export default function Layout({
         {showSidebar && (
           <>
             {/* Desktop Sidebar */}
-            <div className="hidden lg:block w-64 xl:w-72 flex-shrink-0">
-              <Sidebar 
-                isOpen={true}
-                onClose={() => setSidebarOpen(false)}
-              />
+            <div className="hidden lg:block">
+              <div className="fixed top-16 left-0 bottom-0 w-64 xl:w-72 z-30">
+                <Sidebar 
+                  isOpen={true}
+                  onClose={() => setSidebarOpen(false)}
+                />
+              </div>
             </div>
             
             {/* Mobile Sidebar */}
@@ -99,10 +101,11 @@ export default function Layout({
         )}
         
         {/* Main Content */}
-        <main className="
+        <main className={`
           flex-1 relative overflow-x-hidden
           transition-all duration-300 ease-out
-        ">
+          ${showSidebar ? 'lg:ml-64 xl:ml-72' : ''}
+        `}>
           {/* Content Container */}
           <div className={`
             ${maxWidthClasses[maxWidth]} mx-auto

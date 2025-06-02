@@ -127,44 +127,44 @@ export default function Sidebar({ isOpen = true, onClose, className = '' }: Side
             </h3>
           </div>
           
-          <div className="space-y-3">
+          <div className="space-y-4">
             <div className="flex items-center justify-between">
-              <span className="text-xs text-text-secondary">Total Books</span>
-              <div className="flex items-center gap-1">
-                <span className="text-sm font-bold text-sakura-main">
-                  {mounted ? stats.totalBooks : '...'}
+              <span className="text-xs text-text-secondary font-medium">Total Books</span>
+              <div className="flex items-center gap-1.5">
+                <span className="text-sm font-bold text-sakura-deep">
+                  {mounted ? stats.totalBooks : '0'}
                 </span>
-                <span className="text-xs">📚</span>
+                <span className="text-sm">📚</span>
               </div>
             </div>
             
             <div className="flex items-center justify-between">
-              <span className="text-xs text-text-secondary">Words Written</span>
-              <div className="flex items-center gap-1">
-                <span className="text-sm font-bold text-sakura-main">
-                  {mounted ? formatWordCount(stats.totalWordsGenerated) : '...'}
+              <span className="text-xs text-text-secondary font-medium">Words Written</span>
+              <div className="flex items-center gap-1.5">
+                <span className="text-sm font-bold text-sakura-deep">
+                  {mounted ? formatWordCount(stats.totalWordsGenerated) : '0'}
                 </span>
-                <span className="text-xs">✍️</span>
+                <span className="text-sm">✍️</span>
               </div>
             </div>
             
             <div className="flex items-center justify-between">
-              <span className="text-xs text-text-secondary">Completed</span>
-              <div className="flex items-center gap-1">
+              <span className="text-xs text-text-secondary font-medium">Completed</span>
+              <div className="flex items-center gap-1.5">
                 <span className="text-sm font-bold text-green-600">
-                  {mounted ? stats.completedBooks : '...'}
+                  {mounted ? stats.completedBooks : '0'}
                 </span>
-                <span className="text-xs">✅</span>
+                <span className="text-sm">✅</span>
               </div>
             </div>
 
             <div className="flex items-center justify-between">
-              <span className="text-xs text-text-secondary">In Progress</span>
-              <div className="flex items-center gap-1">
-                <span className="text-sm font-bold text-yellow-600">
-                  {mounted ? stats.booksInProgress : '...'}
+              <span className="text-xs text-text-secondary font-medium">In Progress</span>
+              <div className="flex items-center gap-1.5">
+                <span className="text-sm font-bold text-amber-600">
+                  {mounted ? stats.booksInProgress : '0'}
                 </span>
-                <span className="text-xs">⚡</span>
+                <span className="text-sm">⏳</span>
               </div>
             </div>
           </div>

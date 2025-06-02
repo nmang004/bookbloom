@@ -1,7 +1,6 @@
 import { create } from 'zustand';
 import { devtools, persist } from 'zustand/middleware';
 import { Book, Chapter, GenerationStatus, BookStats, BookFormData } from '@/types';
-import { db } from '@/lib/db';
 
 interface BookStore {
   // State
@@ -34,6 +33,51 @@ interface BookStore {
   clearError: () => void;
 }
 
+// API helper functions
+const api = {
+  async get(endpoint: string) {
+    const response = await fetch(`/api${endpoint}`);
+    if (!response.ok) {
+      throw new Error(`API Error: ${response.status}`);
+    }
+    return response.json();
+  },
+
+  async post(endpoint: string, data: unknown) {
+    const response = await fetch(`/api${endpoint}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+    });
+    if (!response.ok) {
+      throw new Error(`API Error: ${response.status}`);
+    }
+    return response.json();
+  },
+
+  async put(endpoint: string, data: unknown) {
+    const response = await fetch(`/api${endpoint}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+    });
+    if (!response.ok) {
+      throw new Error(`API Error: ${response.status}`);
+    }
+    return response.json();
+  },
+
+  async delete(endpoint: string) {
+    const response = await fetch(`/api${endpoint}`, {
+      method: 'DELETE',
+    });
+    if (!response.ok) {
+      throw new Error(`API Error: ${response.status}`);
+    }
+    return response.json();
+  },
+};
+
 export const useBookStore = create<BookStore>()(
   devtools(
     persist(
@@ -54,10 +98,12 @@ export const useBookStore = create<BookStore>()(
 
         // Actions
         fetchBooks: async () => {
+          if (typeof window === 'undefined') return; // Server-side guard
+          
           set({ isLoading: true, error: null });
           try {
-            const books = await db.book.findMany();
-            set({ books: books as Book[], isLoading: false });
+            const books = await api.get('/books');
+            set({ books, isLoading: false });
           } catch (error) {
             set({ 
               error: error instanceof Error ? error.message : 'Failed to fetch books',
@@ -67,14 +113,16 @@ export const useBookStore = create<BookStore>()(
         },
 
         fetchBook: async (id: string) => {
+          if (typeof window === 'undefined') return; // Server-side guard
+          
           set({ isLoading: true, error: null });
           try {
-            const book = await db.book.findUnique(id);
-            if (book) {
-              set({ currentBook: book as Book, chapters: (book.chapters as Chapter[]) || [], isLoading: false });
-            } else {
-              set({ error: 'Book not found', isLoading: false });
-            }
+            const book = await api.get(`/books/${id}`);
+            set({ 
+              currentBook: book, 
+              chapters: book.chapters || [], 
+              isLoading: false 
+            });
           } catch (error) {
             set({ 
               error: error instanceof Error ? error.message : 'Failed to fetch book',
@@ -84,12 +132,15 @@ export const useBookStore = create<BookStore>()(
         },
 
         createBook: async (bookData: BookFormData) => {
+          if (typeof window === 'undefined') return null; // Server-side guard
+          
           set({ isLoading: true, error: null });
           try {
-            const newBook = await db.book.create(bookData);
-            const books = await db.book.findMany();
-            set({ books: books as Book[], currentBook: newBook as Book, isLoading: false });
-            return newBook as Book;
+            const newBook = await api.post('/books', bookData);
+            // Refresh books list
+            const books = await api.get('/books');
+            set({ books, currentBook: newBook, isLoading: false });
+            return newBook;
           } catch (error) {
             set({ 
               error: error instanceof Error ? error.message : 'Failed to create book',
@@ -100,19 +151,18 @@ export const useBookStore = create<BookStore>()(
         },
 
         updateBook: async (id: string, updates: Partial<Book>) => {
+          if (typeof window === 'undefined') return; // Server-side guard
+          
           set({ isLoading: true, error: null });
           try {
-            const updatedBook = await db.book.update(id, updates);
-            if (updatedBook) {
-              const books = await db.book.findMany();
-              set({ 
-                books: books as Book[],
-                currentBook: get().currentBook?.id === id ? (updatedBook as Book) : get().currentBook,
-                isLoading: false 
-              });
-            } else {
-              set({ error: 'Book not found', isLoading: false });
-            }
+            const updatedBook = await api.put(`/books/${id}`, updates);
+            // Refresh books list
+            const books = await api.get('/books');
+            set({ 
+              books,
+              currentBook: get().currentBook?.id === id ? updatedBook : get().currentBook,
+              isLoading: false 
+            });
           } catch (error) {
             set({ 
               error: error instanceof Error ? error.message : 'Failed to update book',
@@ -122,19 +172,18 @@ export const useBookStore = create<BookStore>()(
         },
 
         deleteBook: async (id: string) => {
+          if (typeof window === 'undefined') return; // Server-side guard
+          
           set({ isLoading: true, error: null });
           try {
-            await db.book.delete(id); const success = true;
-            if (success) {
-              const books = await db.book.findMany();
-              set({ 
-                books: books as Book[],
-                currentBook: get().currentBook?.id === id ? null : get().currentBook,
-                isLoading: false 
-              });
-            } else {
-              set({ error: 'Book not found', isLoading: false });
-            }
+            await api.delete(`/books/${id}`);
+            // Refresh books list
+            const books = await api.get('/books');
+            set({ 
+              books,
+              currentBook: get().currentBook?.id === id ? null : get().currentBook,
+              isLoading: false 
+            });
           } catch (error) {
             set({ 
               error: error instanceof Error ? error.message : 'Failed to delete book',
@@ -144,10 +193,13 @@ export const useBookStore = create<BookStore>()(
         },
 
         fetchChapters: async (bookId: string) => {
+          if (typeof window === 'undefined') return; // Server-side guard
+          
           set({ isLoading: true, error: null });
           try {
-            const chapters = await db.chapter.findMany(bookId);
-            set({ chapters: chapters as Chapter[], isLoading: false });
+            // For now, chapters are included with book fetch
+            const book = await api.get(`/books/${bookId}`);
+            set({ chapters: book.chapters || [], isLoading: false });
           } catch (error) {
             set({ 
               error: error instanceof Error ? error.message : 'Failed to fetch chapters',
@@ -157,32 +209,16 @@ export const useBookStore = create<BookStore>()(
         },
 
         updateChapter: async (id: string, updates: Partial<Chapter>) => {
+          if (typeof window === 'undefined') return; // Server-side guard
+          
           set({ isLoading: true, error: null });
           try {
-            const updatedChapter = await db.chapter.update(id, updates);
-            if (updatedChapter) {
-              const chapters = get().chapters.map(chapter =>
-                chapter.id === id ? (updatedChapter as Chapter) : chapter
-              );
-              set({ chapters: chapters as Chapter[], isLoading: false });
-              
-              // Update current book stats if it's loaded
-              const currentBook = get().currentBook;
-              if (currentBook && updatedChapter.bookId === currentBook.id) {
-                const completedChapters = chapters.filter(c => c.status === 'completed').length;
-                const totalWords = chapters.reduce((sum, c) => sum + c.wordCount, 0);
-                
-                set({
-                  currentBook: {
-                    ...currentBook,
-                    completedChapters,
-                    totalWords,
-                  }
-                });
-              }
-            } else {
-              set({ error: 'Chapter not found', isLoading: false });
-            }
+            // This would need a chapters API endpoint in a real implementation
+            // For now, just update locally
+            const chapters = get().chapters.map(chapter =>
+              chapter.id === id ? { ...chapter, ...updates } : chapter
+            );
+            set({ chapters, isLoading: false });
           } catch (error) {
             set({ 
               error: error instanceof Error ? error.message : 'Failed to update chapter',
@@ -192,11 +228,14 @@ export const useBookStore = create<BookStore>()(
         },
 
         startGeneration: async (bookId: string) => {
+          if (typeof window === 'undefined') return; // Server-side guard
+          
           set({ isLoading: true, error: null });
           try {
-            await db.book.update(bookId, { status: 'generating' });
-            const chapters = await db.chapter.findMany(bookId);
-            const pendingChapters = chapters.filter(c => c.status === 'pending');
+            await api.put(`/books/${bookId}`, { status: 'generating' });
+            const book = await api.get(`/books/${bookId}`);
+            const chapters = book.chapters || [];
+            const pendingChapters = chapters.filter((c: Chapter) => c.status === 'pending');
             
             if (pendingChapters.length === 0) {
               set({ error: 'No chapters to generate', isLoading: false });
@@ -207,10 +246,10 @@ export const useBookStore = create<BookStore>()(
               isGenerating: true,
               currentChapter: pendingChapters[0].chapterNumber,
               totalChapters: chapters.length,
-              completedChapters: chapters.filter(c => c.status === 'completed').length,
+              completedChapters: chapters.filter((c: Chapter) => c.status === 'completed').length,
               progress: 0,
-              wordsGenerated: chapters.reduce((sum, c) => sum + c.wordCount, 0),
-              targetWords: chapters.reduce((sum, c) => sum + c.targetWords, 0),
+              wordsGenerated: chapters.reduce((sum: number, c: Chapter) => sum + c.wordCount, 0),
+              targetWords: chapters.reduce((sum: number, c: Chapter) => sum + c.targetWords, 0),
             };
 
             set({ generationStatus: initialStatus, isLoading: false });
@@ -239,11 +278,14 @@ export const useBookStore = create<BookStore>()(
         },
 
         fetchStats: async () => {
+          if (typeof window === 'undefined') return; // Server-side guard
+          
           try {
-            const stats = await db.stats.getBookStats();
+            const stats = await api.get('/stats');
             set({ stats });
           } catch (error) {
             console.error('Failed to fetch stats:', error);
+            // Don't set error for stats as it's not critical
           }
         },
 

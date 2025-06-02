@@ -58,7 +58,7 @@ export default function AnimatedCounter({
 
     const animationFrame = requestAnimationFrame(updateCount);
     return () => cancelAnimationFrame(animationFrame);
-  }, [start, end, duration, hasStarted]);
+  }, [start, end, duration, decimals, hasStarted]);
 
   return (
     <span className={`tabular-nums ${className}`}>
