@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { 
   Globe, 
@@ -21,17 +21,14 @@ import {
   Settings,
   LayoutGrid,
   List,
-  Compass,
-  Wand2
+  Compass
 } from "lucide-react"
 import { motion, AnimatePresence } from 'framer-motion'
 import { 
   WorldElement, 
   WorldElementType, 
-  WorldElementStatus,
   WorldAtlasFilters,
-  WORLD_ELEMENT_CATEGORIES,
-  WORLD_ELEMENT_PROGRESS
+  WORLD_ELEMENT_CATEGORIES
 } from "@/types/worldbuilding"
 import { WorldElementCard } from "./WorldElementCard"
 import { WorldElementForm } from "./WorldElementForm"
@@ -72,10 +69,10 @@ const getCategoryColorClasses = (color: string) => {
 
 export function WorldBuildingAtlas({ bookId, bookTitle, bookSynopsis, bookGenre }: WorldBuildingAtlasProps) {
   const [elements, setElements] = useState<WorldElement[]>([])
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading] = useState(false)
   const [showElementForm, setShowElementForm] = useState(false)
   const [editingElement, setEditingElement] = useState<WorldElement | null>(null)
-  const [selectedElement, setSelectedElement] = useState<WorldElement | null>(null)
+  const [, setSelectedElement] = useState<WorldElement | null>(null)
   const [filters, setFilters] = useState<WorldAtlasFilters>({
     searchTerm: '',
     elementTypes: [],
@@ -205,7 +202,7 @@ export function WorldBuildingAtlas({ bookId, bookTitle, bookSynopsis, bookGenre 
     })
     .sort((a, b) => {
       const { sortBy, sortOrder } = filters
-      let aValue: any, bValue: any
+      let aValue: string | number | Date, bValue: string | number | Date
       
       switch (sortBy) {
         case 'name':
@@ -288,14 +285,14 @@ export function WorldBuildingAtlas({ bookId, bookTitle, bookSynopsis, bookGenre 
     }))
   }
 
-  const getCategoryColor = (type: WorldElementType) => {
-    const category = WORLD_ELEMENT_CATEGORIES.find(cat => cat.type === type)
-    return category?.color || 'gray'
-  }
+  // const getCategoryColor = (type: WorldElementType) => {
+  //   const category = WORLD_ELEMENT_CATEGORIES.find(cat => cat.type === type)
+  //   return category?.color || 'gray'
+  // }
 
-  const getProgressEmoji = (status: WorldElementStatus) => {
-    return WORLD_ELEMENT_PROGRESS[status]?.emoji || '🌰'
-  }
+  // const getProgressEmoji = (status: WorldElementStatus) => {
+  //   return WORLD_ELEMENT_PROGRESS[status]?.emoji || '🌰'
+  // }
 
   const toggleViewMode = () => {
     setFilters(prev => ({

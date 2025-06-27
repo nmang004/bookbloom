@@ -2,7 +2,6 @@
 
 import { useState, useEffect, useRef } from "react"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
 import {
   Sparkles,
   Edit3,
@@ -12,7 +11,6 @@ import {
   ArrowRight,
   Palette,
   Volume2,
-  BarChart3,
   RefreshCw,
   Zap,
   X
@@ -36,7 +34,7 @@ interface AIContextMenuProps {
 interface ContextMenuAction {
   id: string
   label: string
-  icon: any
+  icon: React.ComponentType<{ className?: string }>
   description: string
   category: 'rewrite' | 'enhance' | 'generate' | 'analyze'
   action: () => Promise<void>
@@ -93,7 +91,7 @@ const AIContextMenu = ({
       } else {
         setError(response.error || 'AI generation failed')
       }
-    } catch (err) {
+    } catch {
       setError('An unexpected error occurred')
     } finally {
       setIsLoading(false)

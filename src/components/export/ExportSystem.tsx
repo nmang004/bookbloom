@@ -60,7 +60,7 @@ interface ExportSystemProps {
   chapters: Array<{ id: string; title: string; wordCount: number }>
 }
 
-export function ExportSystem({ bookId, bookTitle, chapters }: ExportSystemProps) {
+export function ExportSystem({ bookId, bookTitle: _bookTitle, chapters }: ExportSystemProps) {
   const [selectedFormat, setSelectedFormat] = useState<'PDF' | 'DOCX' | 'TXT'>('PDF')
   const [selectedChapters, setSelectedChapters] = useState<string[]>(chapters.map(c => c.id))
   const [exportOptions, setExportOptions] = useState({
@@ -123,7 +123,7 @@ export function ExportSystem({ bookId, bookTitle, chapters }: ExportSystemProps)
 
     setIsExporting(true)
     
-    const exportRequest: ExportRequest = {
+    const _exportRequest: ExportRequest = {
       bookId,
       format: selectedFormat,
       chapters: selectedChapters,

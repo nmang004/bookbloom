@@ -25,11 +25,9 @@ import {
   Download,
   RotateCcw,
   Sparkles,
-  Calendar,
-  User,
-  Globe
+  Calendar
 } from "lucide-react"
-import { BookSettings } from "@/types/export"
+import type { BookSettings } from "@/types/export"
 
 const bookSettingsSchema = z.object({
   basicInfo: z.object({
@@ -85,7 +83,7 @@ interface BookSettingsProps {
   onSettingsChange: (settings: BookSettings) => void
 }
 
-export function BookSettings({ bookId, initialSettings, onSettingsChange }: BookSettingsProps) {
+export function BookSettings({ bookId: _bookId, initialSettings, onSettingsChange }: BookSettingsProps) {
   const [isLoading, setIsLoading] = useState(false)
   const [lastSaved, setLastSaved] = useState<Date>(new Date())
   const [newTag, setNewTag] = useState("")
@@ -119,7 +117,7 @@ export function BookSettings({ bookId, initialSettings, onSettingsChange }: Book
     }
   }
 
-  const handleAutoSave = async () => {
+  const _handleAutoSave = async () => {
     if (isDirty) {
       const data = getValues()
       await onSubmit(data)

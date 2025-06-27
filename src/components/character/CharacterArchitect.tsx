@@ -2,11 +2,10 @@
 
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { 
   Users, 
-  Plus, 
   Search, 
   Filter,
   UserPlus,
@@ -14,13 +13,7 @@ import {
   Shield,
   Heart,
   User,
-  Sparkles,
-  BookOpen,
-  Edit3,
-  MoreHorizontal,
-  Eye,
-  Settings,
-  Trash2
+  Settings
 } from "lucide-react"
 import { motion, AnimatePresence } from 'framer-motion'
 import { Character, CharacterRole, CharacterImportance, CharacterFilter } from "@/types/character"
@@ -45,7 +38,7 @@ export function CharacterArchitect({ bookId, bookTitle, bookSynopsis, bookGenre 
   const [characters, setCharacters] = useState<Character[]>([])
   const [showCharacterForm, setShowCharacterForm] = useState(false)
   const [editingCharacter, setEditingCharacter] = useState<Character | null>(null)
-  const [selectedCharacter, setSelectedCharacter] = useState<Character | null>(null)
+  const [, setSelectedCharacter] = useState<Character | null>(null)
   const [filter, setFilter] = useState<CharacterFilter>({})
 
   // Mock data for development - in production this would come from your backend

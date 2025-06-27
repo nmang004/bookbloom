@@ -174,7 +174,7 @@ const pricingTestimonials = [
     rating: 5
   },
   {
-    question: "As a busy professional, The Garden plan is perfect. I can work on multiple book ideas without breaking the bank.",
+    quote: "As a busy professional, The Garden plan is perfect. I can work on multiple book ideas without breaking the bank.",
     author: {
       name: "Michael Chen",
       title: "Part-time Author",

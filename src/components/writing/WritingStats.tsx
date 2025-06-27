@@ -6,9 +6,7 @@ import {
   Target, 
   Clock, 
   TrendingUp, 
-  Award,
-  Zap,
-  Calendar
+  Award
 } from "lucide-react"
 
 interface WritingStatsProps {
@@ -30,7 +28,7 @@ interface WritingStatsProps {
 }
 
 const WritingStats = ({ stats, goals = {} }: WritingStatsProps) => {
-  const { dailyWords = 500, weeklyWords = 3500, monthlyWords = 15000 } = goals
+  const { dailyWords = 500 } = goals
   
   const formatTime = (minutes: number) => {
     const hours = Math.floor(minutes / 60)
@@ -50,7 +48,7 @@ const WritingStats = ({ stats, goals = {} }: WritingStatsProps) => {
   }
 
   const dailyProgress = Math.min((stats.todayWords / dailyWords) * 100, 100)
-  const weeklyProgress = Math.min((stats.todayWords * 7 / weeklyWords) * 100, 100) // Simplified calculation
+  // const weeklyProgress = Math.min((stats.todayWords * 7 / weeklyWords) * 100, 100) // Simplified calculation
   
   return (
     <div className="space-y-4">

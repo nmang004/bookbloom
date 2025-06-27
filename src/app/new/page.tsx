@@ -360,7 +360,7 @@ const Step2 = ({ form, onNext, onPrev }: { form: UseFormReturn<WizardFormData>, 
 // Step 3: AI Enhancement
 const Step3 = ({ form, onNext, onPrev }: { form: UseFormReturn<WizardFormData>, onNext: () => void, onPrev: () => void }) => {
   const [isGenerating, setIsGenerating] = useState(false)
-  const [generatedSynopsis, setGeneratedSynopsis] = useState("")
+  const [, setGeneratedSynopsis] = useState("")
   const [showComparison, setShowComparison] = useState(false)
   const { register, watch, setValue, formState: { errors } } = form
   

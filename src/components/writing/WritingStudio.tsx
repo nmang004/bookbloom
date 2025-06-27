@@ -1,11 +1,10 @@
 "use client"
 
-import { useState, useEffect, useCallback, useRef } from "react"
+import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { 
   PenTool, 
-  Save, 
   Clock, 
   Target, 
   Sparkles,
@@ -17,12 +16,9 @@ import {
   ChevronLeft,
   ChevronRight,
   Play,
-  Settings,
-  BarChart3,
   BookOpen,
   Plus,
-  Search,
-  MoreVertical
+  Search
 } from "lucide-react"
 import { WritingMode, ChapterNavItem, WritingSettings, WritingStudioState, AutosaveState, WritingStats } from "@/types/writing"
 import RichTextEditor from "./RichTextEditor"
@@ -178,7 +174,6 @@ const WritingStudio = ({ book, onNavigateBack }: WritingStudioProps) => {
 
   const [editorContent, setEditorContent] = useState("")
   const [searchQuery, setSearchQuery] = useState("")
-  const editorRef = useRef<HTMLDivElement>(null)
 
   // Set client flag after hydration
   useEffect(() => {

@@ -15,14 +15,8 @@ import {
   Heading1,
   Heading2,
   Heading3,
-  Type,
   Eye,
-  EyeOff,
-  Undo,
-  Redo,
-  Save,
-  MoreHorizontal,
-  Minimize2
+  EyeOff
 } from "lucide-react"
 import { WritingMode, WritingSettings } from "@/types/writing"
 import AIContextMenu from "./AIContextMenu"
@@ -46,7 +40,7 @@ interface RichTextEditorProps {
 
 interface FormatButton {
   command: string
-  icon: any
+  icon: React.ComponentType<{ className?: string }>
   label: string
   shortcut?: string
 }
@@ -92,7 +86,7 @@ const RichTextEditor = ({
   const [characterCount, setCharacterCount] = useState(0)
   const [readingTime, setReadingTime] = useState(0)
   const [selectedText, setSelectedText] = useState("")
-  const [cursorPosition, setCursorPosition] = useState(0)
+  const [, setCursorPosition] = useState(0)
   const [showContextMenu, setShowContextMenu] = useState(false)
   const [contextMenuPosition, setContextMenuPosition] = useState({ x: 0, y: 0 })
 
@@ -120,7 +114,7 @@ const RichTextEditor = ({
   }, [onChange, updateStats])
 
   // Format text
-  const formatText = (command: string, value?: string) => {
+  const formatText = useCallback((command: string, value?: string) => {
     if (!editorRef.current) return
 
     editorRef.current.focus()
@@ -134,7 +128,7 @@ const RichTextEditor = ({
     }
     
     handleContentChange()
-  }
+  }, [handleContentChange])
 
   // Handle keyboard shortcuts
   useEffect(() => {
@@ -177,7 +171,7 @@ const RichTextEditor = ({
 
     document.addEventListener('keydown', handleKeyDown)
     return () => document.removeEventListener('keydown', handleKeyDown)
-  }, [writingMode, isToolbarVisible])
+  }, [writingMode, isToolbarVisible, formatText])
 
   // Handle text selection
   const handleSelection = () => {

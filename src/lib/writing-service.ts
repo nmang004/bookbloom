@@ -1,4 +1,4 @@
-import { AIWritingRequest, AIWritingResponse } from "@/types/writing"
+import { AIWritingResponse } from "@/types/writing"
 
 // Writing service for AI-powered writing assistance
 export class WritingService {
@@ -76,7 +76,7 @@ export class WritingService {
           metadata: data.data.metadata
         }
       }
-    } catch (error) {
+    } catch {
       return {
         success: false,
         error: 'Network error during chapter generation'
@@ -129,7 +129,7 @@ export class WritingService {
           metadata: data.data.metadata
         }
       }
-    } catch (error) {
+    } catch {
       return {
         success: false,
         error: 'Network error during text continuation'
@@ -178,7 +178,7 @@ export class WritingService {
           metadata: data.data.metadata
         }
       }
-    } catch (error) {
+    } catch {
       return {
         success: false,
         error: 'Network error during text rewrite'
@@ -231,7 +231,7 @@ export class WritingService {
           metadata: data.data.metadata
         }
       }
-    } catch (error) {
+    } catch {
       return {
         success: false,
         error: 'Network error during dialogue generation'
@@ -280,7 +280,7 @@ export class WritingService {
           metadata: data.data.metadata
         }
       }
-    } catch (error) {
+    } catch {
       return {
         success: false,
         error: 'Network error during description enhancement'
@@ -334,7 +334,7 @@ export class WritingService {
           metadata: data.data.metadata
         }
       }
-    } catch (error) {
+    } catch {
       return {
         success: false,
         error: 'Network error during consistency check'
@@ -381,7 +381,7 @@ export class WritingService {
           metadata: data.data.metadata
         }
       }
-    } catch (error) {
+    } catch {
       return {
         success: false,
         error: 'Network error during writing suggestion'

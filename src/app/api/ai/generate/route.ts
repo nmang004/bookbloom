@@ -71,9 +71,9 @@ interface WorldElementRequest extends BaseGenerationRequest {
   name: string
   elementData?: CharacterData
   context: BookContext & {
-    existingElements?: any[]
+    existingElements?: (CharacterData | { name: string; type: string; description: string })[]
     enhancementType?: string
-    currentElement?: any
+    currentElement?: CharacterData
   }
 }
 
@@ -87,9 +87,9 @@ interface ChapterGenerationRequest extends BaseGenerationRequest {
     outline?: string
     tone?: string
     style?: string
-    previousChapters?: any[]
+    previousChapters?: { title: string; content: string; number: number; summary?: string }[]
     characters?: CharacterData[]
-    worldElements?: any[]
+    worldElements?: { name: string; type: string; description: string }[]
   }
 }
 
@@ -1338,7 +1338,13 @@ Name: ${name}
 Type: ${elementType}
 
 **Existing World Elements:**
-${existingElements.map((element: { name: string; type: string; description: string }) => `- ${element.name} (${element.type}): ${element.description}`).join('\n') || 'None yet'}
+${existingElements.map((element) => {
+  if ('type' in element && 'description' in element) {
+    return `- ${element.name} (${element.type}): ${element.description}`;
+  } else {
+    return `- ${element.name || 'Unknown'} (Character): ${element.description || 'No description'}`;
+  }
+}).join('\n') || 'None yet'}
 
 **Creation Focus:** ${enhancementFocus}
 
@@ -1365,7 +1371,13 @@ Synopsis: ${context.synopsis}
 ${JSON.stringify(currentElement, null, 2)}
 
 **Existing World Elements:**
-${existingElements.map((element: { name: string; type: string; description: string }) => `- ${element.name} (${element.type}): ${element.description}`).join('\n') || 'None'}
+${existingElements.map((element) => {
+  if ('type' in element && 'description' in element) {
+    return `- ${element.name} (${element.type}): ${element.description}`;
+  } else {
+    return `- ${element.name || 'Unknown'} (Character): ${element.description || 'No description'}`;
+  }
+}).join('\n') || 'None'}
 
 **Enhancement Type:** ${enhancementType}
 

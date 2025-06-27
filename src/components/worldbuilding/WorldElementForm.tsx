@@ -1,8 +1,8 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+// Card components removed as they're not used in this file
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
@@ -23,8 +23,7 @@ import {
   Building,
   Package,
   Star,
-  Plus,
-  Trash2
+  Plus
 } from "lucide-react"
 import { motion, AnimatePresence } from 'framer-motion'
 import { 
@@ -243,12 +242,12 @@ export function WorldElementForm({ element, bookContext, onSave, onCancel }: Wor
 
   const [tagInput, setTagInput] = useState('')
 
-  const handleInputChange = (field: string, value: any, section?: string) => {
+  const handleInputChange = (field: string, value: string | number | string[], section?: string) => {
     if (section) {
       setFormData(prev => ({
         ...prev,
         [section]: {
-          ...(prev[section as keyof FormData] as any),
+          ...(prev[section as keyof FormData] as Record<string, unknown>),
           [field]: value
         }
       }))
@@ -264,26 +263,29 @@ export function WorldElementForm({ element, bookContext, onSave, onCancel }: Wor
     setFormData(prev => ({
       ...prev,
       [section]: {
-        ...(prev[section as keyof FormData] as any),
+        ...(prev[section as keyof FormData] as Record<string, unknown>),
         [field]: value
       }
     }))
   }
 
-  const addArrayItem = (field: string, section: string, value: string = '') => {
-    const currentArray = (formData[section as keyof FormData] as any)[field] as string[]
+  const _addArrayItem = (field: string, section: string, value: string = '') => {
+    const sectionData = formData[section as keyof FormData] as Record<string, unknown>
+    const currentArray = sectionData[field] as string[]
     handleArrayFieldChange(field, [...currentArray, value], section)
   }
 
-  const updateArrayItem = (field: string, section: string, index: number, value: string) => {
-    const currentArray = (formData[section as keyof FormData] as any)[field] as string[]
+  const _updateArrayItem = (field: string, section: string, index: number, value: string) => {
+    const sectionData = formData[section as keyof FormData] as Record<string, unknown>
+    const currentArray = sectionData[field] as string[]
     const newArray = [...currentArray]
     newArray[index] = value
     handleArrayFieldChange(field, newArray, section)
   }
 
-  const removeArrayItem = (field: string, section: string, index: number) => {
-    const currentArray = (formData[section as keyof FormData] as any)[field] as string[]
+  const _removeArrayItem = (field: string, section: string, index: number) => {
+    const sectionData = formData[section as keyof FormData] as Record<string, unknown>
+    const currentArray = sectionData[field] as string[]
     const newArray = currentArray.filter((_, i) => i !== index)
     handleArrayFieldChange(field, newArray, section)
   }
@@ -424,7 +426,7 @@ export function WorldElementForm({ element, bookContext, onSave, onCancel }: Wor
     }
   }
 
-  const currentCategory = WORLD_ELEMENT_CATEGORIES.find(cat => cat.type === formData.type)
+  const _currentCategory = WORLD_ELEMENT_CATEGORIES.find(cat => cat.type === formData.type)
   const Icon = ELEMENT_TYPE_ICONS[formData.type]
 
   return (

@@ -1,8 +1,7 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { 
@@ -14,13 +13,10 @@ import {
   Heart,
   User,
   Save,
-  Wand2,
   ChevronRight,
-  ChevronLeft,
-  Eye,
-  AlertCircle
+  ChevronLeft
 } from "lucide-react"
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { Character, CharacterRole, CharacterImportance } from "@/types/character"
 
 interface CharacterFormProps {
@@ -166,12 +162,12 @@ export function CharacterForm({ character, bookContext, onSave, onCancel }: Char
     }
   })
 
-  const handleInputChange = (field: string, value: any, section?: string) => {
+  const handleInputChange = (field: string, value: string | number | undefined, section?: string) => {
     if (section) {
       setFormData(prev => ({
         ...prev,
         [section]: {
-          ...(prev[section as keyof FormData] as any),
+          ...(prev[section as keyof FormData] as Record<string, unknown>),
           [field]: value
         }
       }))
@@ -187,26 +183,29 @@ export function CharacterForm({ character, bookContext, onSave, onCancel }: Char
     setFormData(prev => ({
       ...prev,
       [section]: {
-        ...(prev[section as keyof FormData] as any),
+        ...(prev[section as keyof FormData] as Record<string, unknown>),
         [field]: value
       }
     }))
   }
 
   const addArrayItem = (field: string, section: string) => {
-    const currentArray = (formData[section as keyof FormData] as any)[field] as string[]
+    const sectionData = formData[section as keyof FormData] as Record<string, unknown>
+    const currentArray = sectionData[field] as string[]
     handleArrayFieldChange(field, [...currentArray, ''], section)
   }
 
   const updateArrayItem = (field: string, section: string, index: number, value: string) => {
-    const currentArray = (formData[section as keyof FormData] as any)[field] as string[]
+    const sectionData = formData[section as keyof FormData] as Record<string, unknown>
+    const currentArray = sectionData[field] as string[]
     const newArray = [...currentArray]
     newArray[index] = value
     handleArrayFieldChange(field, newArray, section)
   }
 
   const removeArrayItem = (field: string, section: string, index: number) => {
-    const currentArray = (formData[section as keyof FormData] as any)[field] as string[]
+    const sectionData = formData[section as keyof FormData] as Record<string, unknown>
+    const currentArray = sectionData[field] as string[]
     const newArray = currentArray.filter((_, i) => i !== index)
     handleArrayFieldChange(field, newArray, section)
   }
@@ -272,7 +271,8 @@ export function CharacterForm({ character, bookContext, onSave, onCancel }: Char
     section: string,
     placeholder: string
   ) => {
-    const currentArray = (formData[section as keyof FormData] as any)[field] as string[]
+    const sectionData = formData[section as keyof FormData] as Record<string, unknown>
+    const currentArray = sectionData[field] as string[]
     
     return (
       <div className="space-y-2">

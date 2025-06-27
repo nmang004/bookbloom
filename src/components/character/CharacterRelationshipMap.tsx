@@ -1,8 +1,7 @@
 "use client"
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Network, Users, Plus } from "lucide-react"
+import { Network } from "lucide-react"
 import { Character } from "@/types/character"
 
 interface CharacterRelationshipMapProps {
@@ -10,7 +9,7 @@ interface CharacterRelationshipMapProps {
   onAddRelationship?: (characterId: string, relatedCharacterId: string) => void
 }
 
-export function CharacterRelationshipMap({ characters, onAddRelationship }: CharacterRelationshipMapProps) {
+export function CharacterRelationshipMap({ characters: _characters, onAddRelationship: _onAddRelationship }: CharacterRelationshipMapProps) {
   return (
     <Card className="border-0 shadow-sm bg-white/70 backdrop-blur-sm">
       <CardHeader>

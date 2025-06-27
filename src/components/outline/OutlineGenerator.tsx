@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -24,7 +24,7 @@ import {
   Copy,
   Trash2
 } from "lucide-react"
-import { motion, Reorder } from 'framer-motion'
+import { Reorder } from 'framer-motion'
 import { Chapter, ChapterStatus, Outline, OutlineStructure, PacingPreference } from "@/types/ai"
 
 interface OutlineGeneratorProps {
@@ -202,7 +202,7 @@ export default function OutlineGenerator({
           chaptersData = parseTextOutline(result.data.generated)
         }
 
-        const chapters: Chapter[] = chaptersData.chapters.map((ch: any, index: number) => ({
+        const chapters: Chapter[] = chaptersData.chapters.map((ch: Record<string, unknown>, index: number) => ({
           id: `chapter-${index + 1}`,
           number: index + 1,
           title: ch.title || `Chapter ${index + 1}`,
@@ -242,7 +242,7 @@ export default function OutlineGenerator({
     // Simple parser - in real app, this would be more sophisticated
     const chapters = []
     const lines = text.split('\n')
-    let currentChapter: any = null
+    let currentChapter: Record<string, unknown> | null = null
     
     for (const line of lines) {
       if (line.match(/^Chapter \d+/i) || line.match(/^\d+\./)) {
@@ -354,10 +354,10 @@ export default function OutlineGenerator({
         const sections = parseEnhancedContent(enhancedContent)
         
         updateChapter(chapterId, {
-          summary: sections.summary || chapter.summary,
-          plotPoints: sections.plotPoints || chapter.plotPoints,
-          characterArcs: sections.characterArcs || chapter.characterArcs,
-          conflicts: sections.conflicts || chapter.conflicts
+          summary: (sections.summary as string) || chapter.summary,
+          plotPoints: (sections.plotPoints as string[]) || chapter.plotPoints,
+          characterArcs: (sections.characterArcs as string[]) || chapter.characterArcs,
+          conflicts: (sections.conflicts as string[]) || chapter.conflicts
         })
       }
     } catch (error) {
@@ -370,7 +370,7 @@ export default function OutlineGenerator({
   // Parse enhanced content into sections
   const parseEnhancedContent = (content: string) => {
     // Simple parser - in real app, this would be more sophisticated
-    const sections: any = {}
+    const sections: Record<string, unknown> = {}
     const lines = content.split('\n')
     let currentSection = 'summary'
     let currentContent = ''
@@ -575,10 +575,10 @@ export default function OutlineGenerator({
         for (let i = 0; i < extraChapters; i++) {
           chapterTemplates.push({
             title: `Chapter ${template.chapters.length + i + 1}`,
-            stage: 'development',
+            stage: 'development' as const,
             purpose: 'Continue the story progression',
             act: 3 // Default to act 3 for any additional chapters
-          } as any)
+          })
         }
       } else {
         // Use only the first N chapters

@@ -1,5 +1,6 @@
 'use client'
 
+import React from 'react'
 import { cn } from '@/lib/utils'
 import { Star } from 'lucide-react'
 import Image from 'next/image'
@@ -14,19 +15,21 @@ interface TestimonialCardProps {
   }
   rating?: number
   className?: string
+  style?: React.CSSProperties
 }
 
 export function TestimonialCard({
   quote,
   author,
   rating = 5,
-  className
+  className,
+  style
 }: TestimonialCardProps) {
   return (
     <div className={cn(
       'bg-white dark:bg-charcoal-800 rounded-2xl p-8 shadow-lg border border-sakura-100/50 dark:border-charcoal-700 hover:shadow-xl hover:scale-105 transition-all duration-300 zen-lift',
       className
-    )}>
+    )} style={style}>
       {/* Rating */}
       <div className="flex items-center space-x-1 mb-6">
         {[...Array(5)].map((_, index) => (
@@ -124,7 +127,7 @@ export function TestimonialSection({
               author={testimonial.author}
               rating={testimonial.rating}
               className="animate-fade-in"
-              style={{animationDelay: `${index * 150}ms`} as any}
+              style={{animationDelay: `${index * 150}ms`} as React.CSSProperties}
             />
           ))}
         </div>
