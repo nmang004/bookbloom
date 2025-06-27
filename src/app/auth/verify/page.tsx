@@ -1,13 +1,13 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import { Mail, CheckCircle, Loader2 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { AuthLayout } from '@/components/auth/AuthLayout'
 
-export default function EmailVerificationPage() {
+function EmailVerificationContent() {
   const searchParams = useSearchParams()
   const email = searchParams.get('email') || ''
   const [isResending, setIsResending] = useState(false)
@@ -118,5 +118,25 @@ export default function EmailVerificationPage() {
         </div>
       </div>
     </AuthLayout>
+  )
+}
+
+export default function EmailVerificationPage() {
+  return (
+    <Suspense fallback={
+      <AuthLayout
+        title="Verify your email"
+        subtitle="We've sent you a verification link"
+      >
+        <div className="text-center space-y-6">
+          <div className="w-16 h-16 bg-sakura-100 dark:bg-sakura-900/20 rounded-full flex items-center justify-center mx-auto">
+            <Loader2 className="h-8 w-8 text-sakura-600 dark:text-sakura-400 animate-spin" />
+          </div>
+          <p className="text-charcoal-600 dark:text-charcoal-300">Loading...</p>
+        </div>
+      </AuthLayout>
+    }>
+      <EmailVerificationContent />
+    </Suspense>
   )
 }
