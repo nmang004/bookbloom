@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
-import { useForm } from "react-hook-form"
+import { useForm, UseFormReturn } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from "zod"
 import { Button } from "@/components/ui/button"
@@ -149,7 +149,7 @@ const SakuraProgressIndicator = ({ currentStep, totalSteps }: { currentStep: num
 }
 
 // Step 1: Title & Genre
-const Step1 = ({ form, onNext }: { form: any, onNext: () => void }) => {
+const Step1 = ({ form, onNext }: { form: UseFormReturn<WizardFormData>, onNext: () => void }) => {
   const { register, watch, formState: { errors } } = form
   const selectedGenre = watch("genre")
 
@@ -252,7 +252,7 @@ const Step1 = ({ form, onNext }: { form: any, onNext: () => void }) => {
 }
 
 // Step 2: Core Idea
-const Step2 = ({ form, onNext, onPrev }: { form: any, onNext: () => void, onPrev: () => void }) => {
+const Step2 = ({ form, onNext, onPrev }: { form: UseFormReturn<WizardFormData>, onNext: () => void, onPrev: () => void }) => {
   const { register, watch, formState: { errors } } = form
   const coreIdea = watch("coreIdea") || ""
 
@@ -315,7 +315,7 @@ const Step2 = ({ form, onNext, onPrev }: { form: any, onNext: () => void, onPrev
             </h4>
           </div>
           <p className="text-sm text-charcoal-600 dark:text-charcoal-400 mb-4">
-            Consider: What if your protagonist's greatest strength became their weakness? 
+            Consider: What if your protagonist&apos;s greatest strength became their weakness? 
             What secret would change everything if revealed?
           </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
@@ -323,7 +323,7 @@ const Step2 = ({ form, onNext, onPrev }: { form: any, onNext: () => void, onPrev
               <span className="font-medium">Characters:</span> Who drives the story?
             </div>
             <div className="bg-white/50 dark:bg-charcoal-700/50 p-3 rounded-lg">
-              <span className="font-medium">Conflict:</span> What's at stake?
+              <span className="font-medium">Conflict:</span> What&apos;s at stake?
             </div>
             <div className="bg-white/50 dark:bg-charcoal-700/50 p-3 rounded-lg">
               <span className="font-medium">Setting:</span> Where does it unfold?
@@ -358,7 +358,7 @@ const Step2 = ({ form, onNext, onPrev }: { form: any, onNext: () => void, onPrev
 }
 
 // Step 3: AI Enhancement
-const Step3 = ({ form, onNext, onPrev }: { form: any, onNext: () => void, onPrev: () => void }) => {
+const Step3 = ({ form, onNext, onPrev }: { form: UseFormReturn<WizardFormData>, onNext: () => void, onPrev: () => void }) => {
   const [isGenerating, setIsGenerating] = useState(false)
   const [generatedSynopsis, setGeneratedSynopsis] = useState("")
   const [showComparison, setShowComparison] = useState(false)
@@ -438,7 +438,7 @@ const Step3 = ({ form, onNext, onPrev }: { form: any, onNext: () => void, onPrev
               
               <div className="space-y-4">
                 <h3 className="text-2xl font-bold text-charcoal-900 dark:text-white">
-                  "{title}"
+                  &quot;{title}&quot;
                 </h3>
                 <div className="bg-white/50 dark:bg-charcoal-700/50 p-6 rounded-xl">
                   <p className="text-charcoal-700 dark:text-charcoal-300 italic">
@@ -613,7 +613,7 @@ const Step3 = ({ form, onNext, onPrev }: { form: any, onNext: () => void, onPrev
 }
 
 // Step 4: Final Setup
-const Step4 = ({ form, onPrev, onComplete }: { form: any, onPrev: () => void, onComplete: () => void }) => {
+const Step4 = ({ form, onPrev, onComplete }: { form: UseFormReturn<WizardFormData>, onPrev: () => void, onComplete: () => void }) => {
   const { register, watch, setValue, formState: { errors } } = form
   const targetWordCount = watch("targetWordCount") || 80000
   const writingSchedule = watch("writingSchedule")

@@ -1,6 +1,11 @@
+interface FAQItem {
+  question: string
+  answer: string
+}
+
 interface StructuredDataProps {
   type: 'website' | 'product' | 'faq' | 'howto'
-  data: any
+  data: FAQItem[] | null
 }
 
 export function StructuredData({ type, data }: StructuredDataProps) {
@@ -68,7 +73,7 @@ export function StructuredData({ type, data }: StructuredDataProps) {
         return {
           "@context": "https://schema.org",
           "@type": "FAQPage",
-          "mainEntity": data.map((faq: any) => ({
+          "mainEntity": data?.map((faq: FAQItem) => ({
             "@type": "Question",
             "name": faq.question,
             "acceptedAnswer": {

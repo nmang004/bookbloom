@@ -15,7 +15,6 @@ import {
   Heart,
   User,
   Sparkles,
-  Loader2,
   BookOpen,
   Edit3,
   MoreHorizontal,
@@ -24,7 +23,7 @@ import {
   Trash2
 } from "lucide-react"
 import { motion, AnimatePresence } from 'framer-motion'
-import { Character, CharacterRole, CharacterImportance, CharacterFilter, CharacterSortOptions } from "@/types/character"
+import { Character, CharacterRole, CharacterImportance, CharacterFilter } from "@/types/character"
 import { CharacterCard } from "./CharacterCard"
 import { CharacterForm } from "./CharacterForm"
 
@@ -42,23 +41,12 @@ const CHARACTER_ROLE_OPTIONS = [
   { value: CharacterRole.MINOR, label: 'Minor', icon: User, color: 'text-gray-500' }
 ]
 
-const CHARACTER_IMPORTANCE_OPTIONS = [
-  { value: CharacterImportance.MAIN, label: 'Main Character' },
-  { value: CharacterImportance.SECONDARY, label: 'Secondary Character' },
-  { value: CharacterImportance.BACKGROUND, label: 'Background Character' }
-]
-
 export function CharacterArchitect({ bookId, bookTitle, bookSynopsis, bookGenre }: CharacterArchitectProps) {
   const [characters, setCharacters] = useState<Character[]>([])
-  const [isLoading, setIsLoading] = useState(false)
   const [showCharacterForm, setShowCharacterForm] = useState(false)
   const [editingCharacter, setEditingCharacter] = useState<Character | null>(null)
   const [selectedCharacter, setSelectedCharacter] = useState<Character | null>(null)
   const [filter, setFilter] = useState<CharacterFilter>({})
-  const [sortOptions, setSortOptions] = useState<CharacterSortOptions>({
-    field: 'name',
-    direction: 'asc'
-  })
 
   // Mock data for development - in production this would come from your backend
   useEffect(() => {
@@ -157,43 +145,6 @@ export function CharacterArchitect({ bookId, bookTitle, bookSynopsis, bookGenre 
       }
       return true
     })
-    .sort((a, b) => {
-      const { field, direction } = sortOptions
-      let aValue: any, bValue: any
-      
-      switch (field) {
-        case 'name':
-          aValue = a.name
-          bValue = b.name
-          break
-        case 'role':
-          aValue = a.role
-          bValue = b.role
-          break
-        case 'importance':
-          aValue = a.importance
-          bValue = b.importance
-          break
-        case 'progress':
-          aValue = a.developmentProgress.overall
-          bValue = b.developmentProgress.overall
-          break
-        case 'createdAt':
-          aValue = a.createdAt
-          bValue = b.createdAt
-          break
-        case 'updatedAt':
-          aValue = a.updatedAt
-          bValue = b.updatedAt
-          break
-        default:
-          return 0
-      }
-      
-      if (aValue < bValue) return direction === 'asc' ? -1 : 1
-      if (aValue > bValue) return direction === 'asc' ? 1 : -1
-      return 0
-    })
 
   const handleCreateCharacter = () => {
     setEditingCharacter(null)
@@ -244,24 +195,6 @@ export function CharacterArchitect({ bookId, bookTitle, bookSynopsis, bookGenre 
     }
     setShowCharacterForm(false)
     setEditingCharacter(null)
-  }
-
-  const getProgressEmoji = (progress: number) => {
-    if (progress === 0) return '🌰'
-    if (progress <= 25) return '🌱'
-    if (progress <= 50) return '🌿'
-    if (progress <= 75) return '🌺'
-    return '🌸'
-  }
-
-  const getRoleIcon = (role: CharacterRole) => {
-    const option = CHARACTER_ROLE_OPTIONS.find(opt => opt.value === role)
-    return option ? option.icon : User
-  }
-
-  const getRoleColor = (role: CharacterRole) => {
-    const option = CHARACTER_ROLE_OPTIONS.find(opt => opt.value === role)
-    return option ? option.color : 'text-gray-500'
   }
 
   return (
@@ -427,24 +360,6 @@ export function CharacterArchitect({ bookId, bookTitle, bookSynopsis, bookGenre 
         )}
       </AnimatePresence>
 
-      {/* Loading Overlay */}
-      <AnimatePresence>
-        {isLoading && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50"
-          >
-            <Card className="p-6">
-              <div className="flex items-center space-x-3">
-                <Loader2 className="h-5 w-5 animate-spin text-sakura-500" />
-                <p className="text-charcoal-700">Processing your request...</p>
-              </div>
-            </Card>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </div>
   )
 }

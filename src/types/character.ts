@@ -223,7 +223,7 @@ export interface CharacterAnalysisRequest {
     title: string
     synopsis: string
     genre: string
-    chapters?: any[]
+    chapters?: unknown[]
   }
 }
 

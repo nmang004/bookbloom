@@ -277,7 +277,7 @@ const AIContextMenu = ({
       <div className="p-3 bg-charcoal-50 dark:bg-charcoal-900/50 border-b border-charcoal-100 dark:border-charcoal-700">
         <p className="text-xs text-charcoal-600 dark:text-charcoal-400 mb-1">Selected text:</p>
         <p className="text-sm text-charcoal-800 dark:text-charcoal-200 line-clamp-3 italic">
-          "{selectedText.length > 100 ? selectedText.substring(0, 100) + '...' : selectedText}"
+          &quot;{selectedText.length > 100 ? selectedText.substring(0, 100) + '...' : selectedText}&quot;
         </p>
       </div>
 

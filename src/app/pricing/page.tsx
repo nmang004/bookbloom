@@ -332,7 +332,7 @@ export default function PricingPage() {
           <div className="text-center mb-16">
             <h2 className="text-fluid-md font-bold mb-6">Compare All Features</h2>
             <p className="text-xl text-charcoal-600 dark:text-charcoal-300 max-w-3xl mx-auto">
-              See exactly what's included in each plan to make the best choice for your writing journey
+              See exactly what&apos;s included in each plan to make the best choice for your writing journey
             </p>
           </div>
 

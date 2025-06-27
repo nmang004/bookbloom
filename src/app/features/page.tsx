@@ -207,9 +207,9 @@ export default function FeaturesPage() {
                     </div>
                     
                     <div className="bg-sakura-50 dark:bg-sakura-900/20 p-4 rounded-lg border border-sakura-100 dark:border-sakura-800">
-                      <p className="text-sm font-medium mb-2">What's your story about?</p>
+                      <p className="text-sm font-medium mb-2">What&apos;s your story about?</p>
                       <div className="bg-white dark:bg-charcoal-800 p-3 rounded border text-sm text-charcoal-600 dark:text-charcoal-300">
-                        "A young wizard discovers an ancient prophecy that threatens to unravel the fabric of reality itself..."
+                        &quot;A young wizard discovers an ancient prophecy that threatens to unravel the fabric of reality itself...&quot;
                       </div>
                     </div>
                     
@@ -336,7 +336,7 @@ export default function FeaturesPage() {
                     </div>
                     
                     <div className="bg-sakura-50 dark:bg-sakura-900/20 p-4 rounded-lg border border-sakura-100 dark:border-sakura-800">
-                      <p className="text-sm">"The ancient scrolls whispered secrets that Elena had never imagined..."</p>
+                      <p className="text-sm">&quot;The ancient scrolls whispered secrets that Elena had never imagined...&quot;</p>
                     </div>
                     
                     <div className="space-y-2">

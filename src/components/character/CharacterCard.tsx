@@ -13,10 +13,7 @@ import {
   MoreHorizontal,
   Trash2,
   Sparkles,
-  Users,
   BookOpen,
-  Target,
-  MessageCircle
 } from "lucide-react"
 import { motion, AnimatePresence } from 'framer-motion'
 import { Character, CharacterRole } from "@/types/character"

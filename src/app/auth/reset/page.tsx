@@ -29,7 +29,7 @@ export default function ResetPasswordPage() {
       
       setSentEmail(data.email)
       setEmailSent(true)
-    } catch (_) {
+    } catch {
       setError('Failed to send reset email. Please try again.')
     } finally {
       setIsLoading(false)
@@ -49,7 +49,7 @@ export default function ResetPasswordPage() {
           
           <div className="space-y-2">
             <p className="text-charcoal-600 dark:text-charcoal-300">
-              We've sent password reset instructions to:
+              We&apos;ve sent password reset instructions to:
             </p>
             <p className="font-medium text-charcoal-900 dark:text-white">
               {sentEmail}
@@ -58,7 +58,7 @@ export default function ResetPasswordPage() {
 
           <div className="bg-sakura-50 dark:bg-sakura-900/20 border border-sakura-200 dark:border-sakura-800 rounded-lg p-4">
             <p className="text-sm text-charcoal-700 dark:text-charcoal-300">
-              Didn't receive the email? Check your spam folder or{' '}
+              Didn&apos;t receive the email? Check your spam folder or{' '}
               <button
                 onClick={() => setEmailSent(false)}
                 className="text-sakura-600 hover:text-sakura-700 dark:text-sakura-400 dark:hover:text-sakura-300 font-medium"

@@ -33,7 +33,7 @@ export default function SignUpPage() {
       
       // For now, redirect to verification page
       router.push('/auth/verify?email=' + encodeURIComponent(data.email))
-    } catch (_) {
+    } catch {
       setError('Failed to create account. Please try again.')
     } finally {
       setIsLoading(false)
@@ -52,7 +52,7 @@ export default function SignUpPage() {
       await new Promise(resolve => setTimeout(resolve, 1000))
       
       router.push('/dashboard')
-    } catch (_) {
+    } catch {
       setError('Failed to sign up with Google. Please try again.')
     } finally {
       setIsLoading(false)
@@ -71,7 +71,7 @@ export default function SignUpPage() {
       await new Promise(resolve => setTimeout(resolve, 1000))
       
       router.push('/dashboard')
-    } catch (_) {
+    } catch {
       setError('Failed to sign up with GitHub. Please try again.')
     } finally {
       setIsLoading(false)

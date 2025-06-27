@@ -155,7 +155,7 @@ export default function HomePage() {
                     </div>
                     <p className="text-sm text-charcoal-600 dark:text-charcoal-400">Chapter 12 of 16 • 45,230 words</p>
                     <div className="bg-sakura-50 dark:bg-sakura-900/20 p-4 rounded-lg border border-sakura-100 dark:border-sakura-800">
-                      <p className="text-sm italic text-charcoal-700 dark:text-charcoal-300">"The ancient scrolls whispered secrets that Elena had never imagined..."</p>
+                      <p className="text-sm italic text-charcoal-700 dark:text-charcoal-300">&quot;The ancient scrolls whispered secrets that Elena had never imagined...&quot;</p>
                     </div>
                   </div>
                 </div>
@@ -274,7 +274,7 @@ export default function HomePage() {
                 
                 {/* Zen Garden: Breathing room in content */}
                 <p className="text-xl text-charcoal-600 dark:text-charcoal-300 leading-relaxed">
-                  Your personal AI writing assistant helps you overcome writer's block, suggests improvements, 
+                  Your personal AI writing assistant helps you overcome writer&apos;s block, suggests improvements, 
                   and maintains consistency throughout your manuscript.
                 </p>
                 
@@ -310,7 +310,7 @@ export default function HomePage() {
                       <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
                     </div>
                     <div className="bg-sakura-50 dark:bg-sakura-900/20 p-4 rounded-lg border border-sakura-100 dark:border-sakura-800">
-                      <p className="text-sm">"The wizard's eyes gleamed with ancient knowledge..."</p>
+                      <p className="text-sm">&quot;The wizard&apos;s eyes gleamed with ancient knowledge...&quot;</p>
                     </div>
                     <div className="space-y-2">
                       <button className="text-left w-full p-3 hover:bg-sakura-50 dark:hover:bg-sakura-900/30 rounded-lg text-sm transition-all duration-150 tech-feedback border border-transparent hover:border-sakura-200">
@@ -340,7 +340,7 @@ export default function HomePage() {
                 
                 <p className="text-xl text-charcoal-600 dark:text-charcoal-300 leading-relaxed">
                   Build complex, believable characters with AI assistance. Generate backstories, personality traits, 
-                  and character arcs that serve your story's needs.
+                  and character arcs that serve your story&apos;s needs.
                 </p>
                 
                 <ul className="space-y-4">
@@ -383,7 +383,7 @@ export default function HomePage() {
                     </div>
                     <div className="bg-sakura-50 dark:bg-sakura-900/20 p-4 rounded-lg border border-sakura-100 dark:border-sakura-800">
                       <p className="text-xs text-charcoal-700 dark:text-charcoal-300">
-                        "A powerful wizard haunted by past failures, Elias must learn to trust others to save his world..."
+                        &quot;A powerful wizard haunted by past failures, Elias must learn to trust others to save his world...&quot;
                       </p>
                     </div>
                   </div>
@@ -487,7 +487,7 @@ export default function HomePage() {
             </h2>
             
             <p className="text-xl lg:text-2xl opacity-90 leading-relaxed max-w-3xl mx-auto">
-              Join thousands of authors who've discovered the joy of AI-assisted writing. 
+              Join thousands of authors who&apos;ve discovered the joy of AI-assisted writing. 
               Begin your journey from seed to sakura today.
             </p>
             

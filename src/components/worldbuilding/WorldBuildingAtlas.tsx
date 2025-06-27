@@ -315,7 +315,7 @@ export function WorldBuildingAtlas({ bookId, bookTitle, bookSynopsis, bookGenre 
             </div>
             <div>
               <h2 className="text-2xl font-bold text-charcoal-900">World-Building Atlas</h2>
-              <p className="text-sm text-charcoal-600">Create and manage your story's world, locations, and lore</p>
+              <p className="text-sm text-charcoal-600">Create and manage your story&apos;s world, locations, and lore</p>
             </div>
           </div>
           <motion.div

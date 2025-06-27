@@ -31,7 +31,7 @@ export default function SignInPage() {
       
       // For now, just redirect to dashboard
       router.push('/dashboard')
-    } catch (_) {
+    } catch {
       setError('Invalid email or password. Please try again.')
     } finally {
       setIsLoading(false)
@@ -50,7 +50,7 @@ export default function SignInPage() {
       await new Promise(resolve => setTimeout(resolve, 1000))
       
       router.push('/dashboard')
-    } catch (_) {
+    } catch {
       setError('Failed to sign in with Google. Please try again.')
     } finally {
       setIsLoading(false)
@@ -69,7 +69,7 @@ export default function SignInPage() {
       await new Promise(resolve => setTimeout(resolve, 1000))
       
       router.push('/dashboard')
-    } catch (_) {
+    } catch {
       setError('Failed to sign in with GitHub. Please try again.')
     } finally {
       setIsLoading(false)
@@ -105,7 +105,7 @@ export default function SignInPage() {
           </Link>
           
           <div className="text-charcoal-600 dark:text-charcoal-400">
-            Don't have an account?{' '}
+            Don&apos;t have an account?{' '}
             <Link
               href="/auth/signup"
               className="text-sakura-600 hover:text-sakura-700 dark:text-sakura-400 dark:hover:text-sakura-300 font-medium transition-colors duration-200"

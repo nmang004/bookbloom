@@ -13,6 +13,10 @@ interface BookContext {
 }
 
 interface CharacterData {
+  name?: string
+  role?: string
+  description?: string
+  traits?: string[]
   [key: string]: unknown
 }
 
@@ -38,14 +42,19 @@ interface CharacterRequest extends BaseGenerationRequest {
   role: string
   importance?: string
   characterData?: CharacterData
-  context: BookContext
+  context: BookContext & {
+    existingCharacters?: CharacterData[]
+  }
 }
 
 interface CharacterEnhancementRequest extends BaseGenerationRequest {
   type: 'character_enhancement'
   characterId: string
   enhancementType: string
-  context: BookContext
+  context: BookContext & {
+    character: CharacterData
+    existingCharacters?: CharacterData[]
+  }
 }
 
 interface CharacterAnalysisRequest extends BaseGenerationRequest {
@@ -61,51 +70,105 @@ interface WorldElementRequest extends BaseGenerationRequest {
   elementType: string
   name: string
   elementData?: CharacterData
-  context: BookContext
+  context: BookContext & {
+    existingElements?: any[]
+    enhancementType?: string
+    currentElement?: any
+  }
 }
 
 interface ChapterGenerationRequest extends BaseGenerationRequest {
   type: 'chapter_generation'
   bookId: string
-  context: BookContext
+  context: BookContext & {
+    targetLength?: number
+    chapterNumber?: number
+    chapterTitle?: string
+    outline?: string
+    tone?: string
+    style?: string
+    previousChapters?: any[]
+    characters?: CharacterData[]
+    worldElements?: any[]
+  }
 }
 
 interface ParagraphContinuationRequest extends BaseGenerationRequest {
   type: 'paragraph_continuation'
   currentText: string
-  context?: BookContext
+  context?: BookContext & {
+    characters?: string[]
+    tone?: string
+  }
 }
 
 interface TextRewriteRequest extends BaseGenerationRequest {
   type: 'text_rewrite'
   text: string
   instruction: string
-  context?: any
+  context?: {
+    bookTitle?: string
+    genre?: string
+    tone?: string
+    scene?: string
+    mood?: string
+  }
 }
 
 interface DialogueGenerationRequest extends BaseGenerationRequest {
   type: 'dialogue_generation'
-  context: any
+  context: {
+    bookId: string
+    chapterId: string
+    situation: string
+    characters: Array<{
+      name: string
+      personality: string
+      voice: string
+    }>
+    tone?: string
+  }
 }
 
 interface DescriptionEnhancementRequest extends BaseGenerationRequest {
   type: 'description_enhancement'
   text: string
   enhancementType: string
-  context?: any
+  context?: {
+    genre: string
+    scene?: string
+    mood?: string
+  }
 }
 
 interface ConsistencyCheckRequest extends BaseGenerationRequest {
   type: 'consistency_check'
   text: string
-  context: any
+  context: {
+    bookId: string
+    characters: Array<{
+      name: string
+      traits: string[]
+      backstory: string
+    }>
+    worldElements: Array<{
+      name: string
+      type: string
+      description: string
+    }>
+    plotPoints: string[]
+  }
 }
 
 interface WritingSuggestionRequest extends BaseGenerationRequest {
   type: 'writing_suggestion'
   text: string
   suggestionType: string
-  context?: any
+  context?: {
+    genre?: string
+    targetAudience?: string
+    style?: string
+  }
 }
 
 type GenerationRequest = 
@@ -653,7 +716,7 @@ Guidelines:
 **Character Importance:** ${importance}
 
 **Existing Characters:**
-${existingCharacters.map((char: any) => `- ${char.name} (${char.role})`).join('\n') || 'None'}
+${existingCharacters.map((char) => `- ${char.name || 'Unknown'} (${char.role || 'Unknown'})`).join('\n') || 'None'}
 
 Return the character as a JSON object with this structure:
 {
@@ -861,7 +924,7 @@ Role: ${character.role}
 Current Info: ${JSON.stringify(character, null, 2)}
 
 **Existing Characters:**
-${existingCharacters.map((char: any) => `- ${char.name} (${char.role})`).join('\n') || 'None'}
+${existingCharacters.map((char) => `- ${char.name || 'Unknown'} (${char.role || 'Unknown'})`).join('\n') || 'None'}
 
 **Enhancement Focus:** ${enhancementFocus}
 
@@ -975,13 +1038,13 @@ Guidelines:
       userPrompt = `Analyze these characters for ${analysisType}:
 
 **Book Context:**
-Title: ${bookContext.title}
-Genre: ${bookContext.genre}
-Synopsis: ${bookContext.synopsis}
+Title: ${bookContext?.title || 'Unknown'}
+Genre: ${bookContext?.genre || 'Unknown'}
+Synopsis: ${bookContext?.synopsis || 'No synopsis provided'}
 
 **Characters to Analyze:**
-${characters.map((char: any) => `
-**${char.name}** (${char.role})
+${characters.map((char) => `
+**${char.name || 'Unknown'}** (${char.role || 'Unknown'})
 ${JSON.stringify(char, null, 2)}
 `).join('\n')}
 
@@ -1275,7 +1338,7 @@ Name: ${name}
 Type: ${elementType}
 
 **Existing World Elements:**
-${existingElements.map((element: any) => `- ${element.name} (${element.type}): ${element.description}`).join('\n') || 'None yet'}
+${existingElements.map((element: { name: string; type: string; description: string }) => `- ${element.name} (${element.type}): ${element.description}`).join('\n') || 'None yet'}
 
 **Creation Focus:** ${enhancementFocus}
 
@@ -1302,7 +1365,7 @@ Synopsis: ${context.synopsis}
 ${JSON.stringify(currentElement, null, 2)}
 
 **Existing World Elements:**
-${existingElements.map((element: any) => `- ${element.name} (${element.type}): ${element.description}`).join('\n') || 'None'}
+${existingElements.map((element: { name: string; type: string; description: string }) => `- ${element.name} (${element.type}): ${element.description}`).join('\n') || 'None'}
 
 **Enhancement Type:** ${enhancementType}
 
@@ -1346,10 +1409,10 @@ ${context.tone ? `Tone: ${context.tone}` : ''}
 ${context.style ? `Style: ${context.style}` : ''}
 
 **Characters:**
-${context.characters.map((char: any) => `${char.name}: ${char.description} (Traits: ${char.traits.join(', ')})`).join('\n')}
+${context.characters?.map((char) => `${char.name || 'Unknown'}: ${char.description || 'No description'} (Traits: ${char.traits?.join(', ') || 'None'})`).join('\n') || 'No characters specified'}
 
 **World Elements:**
-${context.worldElements?.map((elem: any) => `${elem.name} (${elem.type}): ${elem.description}`).join('\n') || 'None specified'}
+${context.worldElements?.map((elem: { name: string; type: string; description: string }) => `${elem.name} (${elem.type}): ${elem.description}`).join('\n') || 'None specified'}
 
 **Previous Chapter Summary:**
 ${context.previousChapters?.slice(-1)[0]?.summary || 'This is the first chapter of the book.'}
@@ -1369,15 +1432,15 @@ Guidelines:
 - Ensure smooth transitions and logical progression
 - Write 1-3 paragraphs (approximately 100-300 words)`
 
-      userPrompt = `Continue this ${context.genre} story naturally:
+      userPrompt = `Continue this ${context?.genre || 'fiction'} story naturally:
 
 **Current Text:**
 ${currentText}
 
 **Context:**
-Genre: ${context.genre}
-Characters involved: ${context.characters?.join(', ') || 'Unknown'}
-${context.tone ? `Tone: ${context.tone}` : ''}
+Genre: ${context?.genre || 'Unknown'}
+Characters involved: ${context?.characters?.join(', ') || 'Unknown'}
+${context?.tone ? `Tone: ${context.tone}` : ''}
 
 Please continue the narrative in a way that feels like a natural extension of the existing text, maintaining the same voice and style while moving the story forward.`
 
@@ -1423,7 +1486,7 @@ Guidelines:
 
 **Situation:** ${context.situation}
 **Characters:**
-${context.characters.map((char: any) => `${char.name}: ${char.personality} (Voice: ${char.voice})`).join('\n')}
+${context.characters.map((char: { name: string; personality: string; voice: string }) => `${char.name}: ${char.personality} (Voice: ${char.voice})`).join('\n')}
 
 ${context.tone ? `**Tone:** ${context.tone}` : ''}
 
@@ -1448,9 +1511,9 @@ Guidelines:
 ${text}
 
 **Enhancement Type:** ${enhancementType}
-**Genre:** ${context.genre}
-${context.scene ? `**Scene:** ${context.scene}` : ''}
-${context.mood ? `**Mood:** ${context.mood}` : ''}
+**Genre:** ${context?.genre || 'Unknown'}
+${context?.scene ? `**Scene:** ${context.scene}` : ''}
+${context?.mood ? `**Mood:** ${context.mood}` : ''}
 
 Add rich ${enhancementType} details that bring this scene to life while maintaining the original flow and meaning.`
 
@@ -1473,10 +1536,10 @@ Guidelines:
 ${text}
 
 **Character Profiles:**
-${context.characters.map((char: any) => `${char.name}: Traits: ${char.traits.join(', ')} | Background: ${char.background}`).join('\n')}
+${context.characters.map((char: { name: string; traits: string[]; backstory: string }) => `${char.name}: Traits: ${char.traits.join(', ')} | Background: ${char.backstory}`).join('\n')}
 
 **World Rules:**
-${context.worldElements.map((elem: any) => `${elem.name}: ${elem.rules.join(', ')}`).join('\n')}
+${context.worldElements.map((elem: { name: string; type: string; description: string }) => `${elem.name} (${elem.type}): ${elem.description}`).join('\n')}
 
 Analyze the text for any character or world-building inconsistencies and provide specific feedback with suggestions for improvement.`
 
@@ -1499,8 +1562,8 @@ Guidelines:
 ${text}
 
 **Analysis Focus:** ${suggestionType}
-**Genre:** ${context.genre}
-${context.targetAudience ? `**Target Audience:** ${context.targetAudience}` : ''}
+**Genre:** ${context?.genre || 'Unknown'}
+${context?.targetAudience ? `**Target Audience:** ${context.targetAudience}` : ''}
 
 Provide specific suggestions for improving the ${suggestionType} of this text, with explanations for why each suggestion would be beneficial.`
     }

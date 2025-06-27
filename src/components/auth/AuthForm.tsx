@@ -85,14 +85,6 @@ export function AuthForm({ type, onSubmit, isLoading = false, error, className }
     }
   }
 
-  const getTitle = () => {
-    switch (type) {
-      case 'signin': return 'Welcome back'
-      case 'signup': return 'Create your account'
-      case 'reset': return 'Reset your password'
-    }
-  }
-
   const getSubmitText = () => {
     if (isLoading) return <Loader2 className="h-4 w-4 animate-spin" />
     switch (type) {

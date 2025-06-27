@@ -164,7 +164,7 @@ const WritingStats = ({ stats, goals = {} }: WritingStatsProps) => {
               </span>
             </div>
             <div className="flex justify-between">
-              <span className="text-charcoal-600 dark:text-charcoal-400">Today's Words:</span>
+              <span className="text-charcoal-600 dark:text-charcoal-400">Today&apos;s Words:</span>
               <span className="font-medium text-charcoal-900 dark:text-white">
                 {stats.todayWords}
               </span>
@@ -178,11 +178,11 @@ const WritingStats = ({ stats, goals = {} }: WritingStatsProps) => {
         <CardContent className="p-4 text-center">
           <div className="text-sm text-charcoal-700 dark:text-charcoal-300">
             {dailyProgress >= 100 ? (
-              <>🎉 Excellent work today! You've reached your daily goal.</>
+              <>🎉 Excellent work today! You&apos;ve reached your daily goal.</>
             ) : dailyProgress >= 75 ? (
               <>🌟 Almost there! Just {dailyWords - stats.todayWords} more words to go.</>
             ) : dailyProgress >= 50 ? (
-              <>✨ Great progress! You're halfway to your daily goal.</>
+              <>✨ Great progress! You&apos;re halfway to your daily goal.</>
             ) : dailyProgress >= 25 ? (
               <>📝 Good start! Keep the momentum going.</>
             ) : (

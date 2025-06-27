@@ -29,11 +29,14 @@ const getFileExtension = (format: string): string => {
 
 export async function POST(
   request: NextRequest,
-  { params }: { params: { bookId: string } }
+  { params }: { params: Promise<{ bookId: string }> }
 ) {
   try {
-    const { bookId } = params
+    const { bookId } = await params
     const exportRequest: ExportRequest = await request.json()
+    
+    // Set the bookId from the URL parameter
+    exportRequest.bookId = bookId
     
     // Validate request
     if (!exportRequest.format || !exportRequest.chapters?.length) {
@@ -58,10 +61,10 @@ export async function POST(
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { bookId: string } }
+  { params }: { params: Promise<{ bookId: string }> }
 ) {
   try {
-    const { bookId } = params
+    const { bookId } = await params
     
     // Mock export history - in production this would fetch from database
     const exportJobs: ExportJob[] = [

@@ -333,7 +333,7 @@ startxref
    */
   static estimateProcessingTime(wordCount: number, format: string): number {
     // Base time in seconds
-    let baseTime = 10
+    const baseTime = 10
     
     // Add time based on word count (1 second per 1000 words)
     const wordTime = Math.ceil(wordCount / 1000)

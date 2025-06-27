@@ -245,7 +245,7 @@ export class AIGenerationError extends Error {
   constructor(
     message: string,
     public errorCode: AIGenerateResponse['errorCode'],
-    public details?: any
+    public details?: unknown
   ) {
     super(message)
     this.name = 'AIGenerationError'

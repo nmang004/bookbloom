@@ -1,6 +1,5 @@
 'use client'
 
-import { ReactNode } from 'react'
 import { Check, Star } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'

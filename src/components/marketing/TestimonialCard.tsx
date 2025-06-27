@@ -2,6 +2,7 @@
 
 import { cn } from '@/lib/utils'
 import { Star } from 'lucide-react'
+import Image from 'next/image'
 
 interface TestimonialCardProps {
   quote: string
@@ -43,7 +44,7 @@ export function TestimonialCard({
 
       {/* Quote */}
       <blockquote className="text-charcoal-700 dark:text-charcoal-200 text-lg leading-relaxed mb-6 italic">
-        "{quote}"
+        &quot;{quote}&quot;
       </blockquote>
 
       {/* Author */}
@@ -51,9 +52,11 @@ export function TestimonialCard({
         {/* Avatar */}
         <div className="w-12 h-12 bg-sakura-100 dark:bg-sakura-900/20 rounded-full flex items-center justify-center overflow-hidden">
           {author.avatar ? (
-            <img 
+            <Image 
               src={author.avatar} 
               alt={author.name}
+              width={48}
+              height={48}
               className="w-full h-full object-cover"
             />
           ) : (

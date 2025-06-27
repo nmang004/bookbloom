@@ -4,7 +4,7 @@ import { useState } from "react"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { ExportSystem } from "@/components/export/ExportSystem"
 import { BookSettings } from "@/components/settings/BookSettings"
-import { Download, Settings, BookOpen } from "lucide-react"
+import { Download, Settings } from "lucide-react"
 import { BookSettings as BookSettingsType } from "@/types/export"
 
 interface SettingsSectionProps {

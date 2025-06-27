@@ -3,7 +3,6 @@ import {
   AIGenerateRequest, 
   AIGenerateResponse, 
   AIGenerationOptions,
-  ChapterContext,
   AIGenerationError,
   RateLimitError,
   InvalidRequestError

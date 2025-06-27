@@ -29,7 +29,7 @@ export default function EmailVerificationPage() {
       await new Promise(resolve => setTimeout(resolve, 1000))
       
       setResendSuccess(true)
-    } catch (_) {
+    } catch {
       setResendError('Failed to resend email. Please try again.')
     } finally {
       setIsResending(false)
@@ -48,7 +48,7 @@ export default function EmailVerificationPage() {
         
         <div className="space-y-2">
           <p className="text-charcoal-600 dark:text-charcoal-300">
-            We've sent a verification link to:
+            We&apos;ve sent a verification link to:
           </p>
           {email && (
             <p className="font-medium text-charcoal-900 dark:text-white">
@@ -78,7 +78,7 @@ export default function EmailVerificationPage() {
 
         <div className="space-y-4">
           <p className="text-sm text-charcoal-600 dark:text-charcoal-400">
-            Didn't receive the email? Check your spam folder.
+            Didn&apos;t receive the email? Check your spam folder.
           </p>
           
           <Button

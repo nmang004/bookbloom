@@ -109,21 +109,21 @@ const getGardenDescription = (books: typeof mockBooks) => {
   return `${total} ${total === 1 ? 'story grows' : 'stories grow'} in your garden. ${completed} already in full bloom.`
 }
 
-// Garden Seasons Feature
-const getGardenSeason = (books: typeof mockBooks) => {
-  const activeBooks = books.filter(b => b.status === 'writing').length
-  const completedRecently = books.filter(b => {
-    const lastModified = new Date(b.lastModified)
-    const thirtyDaysAgo = new Date()
-    thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30)
-    return b.status === 'completed' && lastModified > thirtyDaysAgo
-  }).length
-  
-  if (completedRecently > 0) return "harvest" // Autumn colors
-  if (activeBooks > 2) return "growth"        // Summer greens  
-  if (activeBooks > 0) return "spring"        // Fresh growth
-  return "contemplation"                      // Winter blues
-}
+// Garden Seasons Feature - Currently unused but kept for future implementation
+// const getGardenSeason = (books: typeof mockBooks) => {
+//   const activeBooks = books.filter(b => b.status === 'writing').length
+//   const completedRecently = books.filter(b => {
+//     const lastModified = new Date(b.lastModified)
+//     const thirtyDaysAgo = new Date()
+//     thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30)
+//     return b.status === 'completed' && lastModified > thirtyDaysAgo
+//   }).length
+//   
+//   if (completedRecently > 0) return "harvest" // Autumn colors
+//   if (activeBooks > 2) return "growth"        // Summer greens  
+//   if (activeBooks > 0) return "spring"        // Fresh growth
+//   return "contemplation"                      // Winter blues
+// }
 
 // Writing Streak Indicator Component
 const WritingStreak = ({ days }: { days: number }) => (
@@ -148,7 +148,7 @@ const AIMusePanel = () => (
       </h4>
     </div>
     <p className="text-sm text-charcoal-600 dark:text-charcoal-400 mb-3">
-      "Consider exploring your protagonist's greatest fear in the next chapter..."
+      &quot;Consider exploring your protagonist&apos;s greatest fear in the next chapter...&quot;
     </p>
     <Button variant="outline" size="sm" className="border-sakura-300 text-sakura-600 hover:bg-sakura-50">
       Explore Suggestion
@@ -161,8 +161,7 @@ const SakuraProgressIndicator = ({
   status, 
   progress, 
   wordCount, 
-  targetWordCount,
-  size = "medium" 
+  targetWordCount
 }: {
   status: BookStatus
   progress: number
@@ -545,13 +544,6 @@ export default function DashboardPage() {
     return actions[status as keyof typeof actions] || "Open"
   }
 
-  const getInspirationalMessage = (status: string, progress: number) => {
-    if (status === "completed") return "A masterpiece achieved through dedication and patience"
-    if (progress > 75) return "Your story yearns for its final chapters"
-    if (progress > 50) return "Momentum builds as your world comes alive"
-    if (progress > 25) return "Each word is a step deeper into your universe"
-    return "Every great story begins with a single word"
-  }
 
   const getTimeAgo = (dateString: string) => {
     const date = new Date(dateString)

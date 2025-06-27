@@ -66,7 +66,7 @@ export interface BookSettings {
   }
   exportDefaults: {
     preferredFormat: 'PDF' | 'DOCX' | 'TXT'
-    standardOptions: Record<string, any>
+    standardOptions: Record<string, unknown>
     includeMetadata: boolean
   }
   privacy: {

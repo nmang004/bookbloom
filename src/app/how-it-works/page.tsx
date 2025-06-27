@@ -282,7 +282,7 @@ export default function HowItWorksPage() {
           <div className="text-center mb-20">
             <h2 className="text-fluid-md font-bold mb-8">Perfect for Every Writer</h2>
             <p className="text-xl text-charcoal-600 dark:text-charcoal-300 max-w-3xl mx-auto">
-              Whether you're a first-time writer or a seasoned author, BookBloom adapts to your experience level and writing style.
+              Whether you&apos;re a first-time writer or a seasoned author, BookBloom adapts to your experience level and writing style.
             </p>
           </div>
 

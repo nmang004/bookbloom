@@ -37,7 +37,7 @@ export default function TestPage() {
           variant: "destructive",
         })
       }
-    } catch (error) {
+    } catch {
       toast({
         title: "Error",
         description: "Failed to test AI generation",

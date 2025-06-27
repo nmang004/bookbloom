@@ -394,7 +394,7 @@ export function BookSettings({ bookId, initialSettings, onSettingsChange }: Book
                         Progress Estimate
                       </div>
                       <div className="text-xs text-sakura-700 dark:text-sakura-400">
-                        At {watchedValues.goals?.dailyGoal || 0} words per day, you'll complete your {(watchedValues.goals?.targetWordCount || 0).toLocaleString()} word goal in approximately {Math.ceil((watchedValues.goals?.targetWordCount || 0) / (watchedValues.goals?.dailyGoal || 1))} days.
+                        At {watchedValues.goals?.dailyGoal || 0} words per day, you&apos;ll complete your {(watchedValues.goals?.targetWordCount || 0).toLocaleString()} word goal in approximately {Math.ceil((watchedValues.goals?.targetWordCount || 0) / (watchedValues.goals?.dailyGoal || 1))} days.
                       </div>
                     </div>
                   </div>

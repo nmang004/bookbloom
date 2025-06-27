@@ -6,10 +6,10 @@ const settingsStore = new Map<string, BookSettings>()
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { bookId: string } }
+  { params }: { params: Promise<{ bookId: string }> }
 ) {
   try {
-    const { bookId } = params
+    const { bookId } = await params
     
     // Get existing settings or return defaults
     const existingSettings = settingsStore.get(bookId)
@@ -79,10 +79,10 @@ export async function GET(
 
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { bookId: string } }
+  { params }: { params: Promise<{ bookId: string }> }
 ) {
   try {
-    const { bookId } = params
+    const { bookId } = await params
     const settings: BookSettings = await request.json()
     
     // Validate required fields
@@ -108,10 +108,10 @@ export async function PUT(
 
 export async function PATCH(
   request: NextRequest,
-  { params }: { params: { bookId: string } }
+  { params }: { params: Promise<{ bookId: string }> }
 ) {
   try {
-    const { bookId } = params
+    const { bookId } = await params
     const partialSettings = await request.json()
     
     // Get existing settings
