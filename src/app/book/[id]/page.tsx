@@ -24,9 +24,9 @@ import {
 } from "lucide-react"
 import Link from "next/link"
 import dynamic from "next/dynamic"
-// import OutlineGenerator from "@/components/outline/OutlineGenerator"
-// import { CharacterArchitect } from "@/components/character/CharacterArchitect"
-// import { WorldBuildingAtlas } from "@/components/worldbuilding/WorldBuildingAtlas"
+import OutlineGenerator from "@/components/outline/OutlineGenerator"
+import { CharacterArchitect } from "@/components/character/CharacterArchitect"
+import { WorldBuildingAtlas } from "@/components/worldbuilding/WorldBuildingAtlas"
 
 // Dynamically import WritingStudio with SSR disabled
 const WritingStudio = dynamic(
@@ -495,38 +495,26 @@ export default function BookWorkbench() {
       case "overview":
         return <OverviewSection book={book} />
       case "outline":
-        return (
-          <div className="text-center py-16">
-            <h2 className="text-2xl font-bold text-charcoal-900 dark:text-white mb-2">
-              Outline Generator
-            </h2>
-            <p className="text-charcoal-600 dark:text-charcoal-400">
-              Outline functionality temporarily disabled for testing
-            </p>
-          </div>
-        )
+        return <OutlineGenerator 
+          bookId={bookId} 
+          bookTitle={book.title}
+          bookSynopsis={book.synopsis}
+          bookGenre={book.genre}
+        />
       case "characters":
-        return (
-          <div className="text-center py-16">
-            <h2 className="text-2xl font-bold text-charcoal-900 dark:text-white mb-2">
-              Character Architect
-            </h2>
-            <p className="text-charcoal-600 dark:text-charcoal-400">
-              Character functionality temporarily disabled for testing
-            </p>
-          </div>
-        )
+        return <CharacterArchitect 
+          bookId={bookId}
+          bookTitle={book.title}
+          bookSynopsis={book.synopsis}
+          bookGenre={book.genre}
+        />
       case "worldbuilding":
-        return (
-          <div className="text-center py-16">
-            <h2 className="text-2xl font-bold text-charcoal-900 dark:text-white mb-2">
-              World Building Atlas
-            </h2>
-            <p className="text-charcoal-600 dark:text-charcoal-400">
-              World building functionality temporarily disabled for testing
-            </p>
-          </div>
-        )
+        return <WorldBuildingAtlas 
+          bookId={bookId}
+          bookTitle={book.title}
+          bookSynopsis={book.synopsis}
+          bookGenre={book.genre}
+        />
       case "writing":
         // This case is now handled above with full layout control
         return null
