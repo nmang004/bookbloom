@@ -1,0 +1,210 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String         @id @default(uuid())
+  email         String         @unique
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  books         Book[]
+  aiGenerations AIGeneration[]
+  subscription  Subscription?
+
+  @@map("users")
+}
+
+model Book {
+  id              String                 @id @default(uuid())
+  userId          String
+  user            User                   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  title           String
+  synopsis        String                 @db.Text
+  genre           String
+  status          BookStatus             @default(PLANNING)
+  coverImage      String?
+  wordCount       Int                    @default(0)
+  targetWordCount Int?
+  createdAt       DateTime               @default(now())
+  updatedAt       DateTime               @updatedAt
+  chapters        Chapter[]
+  characters      Character[]
+  worldElements   WorldBuildingElement[]
+  aiGenerations   AIGeneration[]
+  exports         Export[]
+
+  @@index([userId])
+  @@map("books")
+}
+
+model Chapter {
+  id            String        @id @default(uuid())
+  bookId        String
+  book          Book          @relation(fields: [bookId], references: [id], onDelete: Cascade)
+  chapterNumber Int
+  title         String
+  content       String        @db.Text
+  wordCount     Int           @default(0)
+  status        ChapterStatus @default(PLANNED)
+  outline       String?       @db.Text
+  notes         String?       @db.Text
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+
+  @@unique([bookId, chapterNumber])
+  @@index([bookId])
+  @@map("chapters")
+}
+
+model Character {
+  id            String   @id @default(uuid())
+  bookId        String
+  book          Book     @relation(fields: [bookId], references: [id], onDelete: Cascade)
+  name          String
+  description   String   @db.Text
+  traits        Json // Array of traits
+  backstory     String?  @db.Text
+  arc           String?  @db.Text
+  relationships Json? // Relationships with other characters
+  imageUrl      String?
+  notes         String?  @db.Text
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@index([bookId])
+  @@map("characters")
+}
+
+model WorldBuildingElement {
+  id          String           @id @default(uuid())
+  bookId      String
+  book        Book             @relation(fields: [bookId], references: [id], onDelete: Cascade)
+  name        String
+  type        WorldElementType
+  description String           @db.Text
+  details     Json? // Flexible structure for different types
+  imageUrl    String?
+  notes       String?          @db.Text
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+
+  @@index([bookId])
+  @@map("world_building_elements")
+}
+
+model AIGeneration {
+  id           String         @id @default(uuid())
+  userId       String
+  user         User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  bookId       String?
+  book         Book?          @relation(fields: [bookId], references: [id], onDelete: Cascade)
+  type         GenerationType
+  prompt       String         @db.Text
+  response     String         @db.Text
+  tokensUsed   Int
+  modelVersion String
+  createdAt    DateTime       @default(now())
+
+  @@index([userId])
+  @@index([bookId])
+  @@map("ai_generations")
+}
+
+model Export {
+  id        String       @id @default(uuid())
+  bookId    String
+  book      Book         @relation(fields: [bookId], references: [id], onDelete: Cascade)
+  format    ExportFormat
+  fileUrl   String
+  status    ExportStatus
+  createdAt DateTime     @default(now())
+  expiresAt DateTime
+
+  @@index([bookId])
+  @@map("exports")
+}
+
+model Subscription {
+  id               String             @id @default(uuid())
+  userId           String             @unique
+  user             User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+  plan             SubscriptionPlan
+  status           SubscriptionStatus
+  currentPeriodEnd DateTime
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @updatedAt
+
+  @@map("subscriptions")
+}
+
+enum BookStatus {
+  PLANNING
+  WRITING
+  EDITING
+  COMPLETED
+  ARCHIVED
+}
+
+enum ChapterStatus {
+  PLANNED
+  WRITING
+  DRAFT
+  REVIEW
+  FINAL
+}
+
+enum WorldElementType {
+  LOCATION
+  MAGIC_SYSTEM
+  TECHNOLOGY
+  CULTURE
+  HISTORY
+  ORGANIZATION
+  ITEM
+  OTHER
+}
+
+enum GenerationType {
+  SYNOPSIS
+  CHAPTER_OUTLINE
+  CHAPTER_CONTENT
+  CHARACTER_PROFILE
+  WORLD_BUILDING
+  REWRITE
+  CONTINUATION
+}
+
+enum ExportFormat {
+  PDF
+  DOCX
+  EPUB
+  TXT
+}
+
+enum ExportStatus {
+  PROCESSING
+  COMPLETED
+  FAILED
+}
+
+enum SubscriptionPlan {
+  FREE
+  STARTER
+  PROFESSIONAL
+  UNLIMITED
+}
+
+enum SubscriptionStatus {
+  ACTIVE
+  CANCELED
+  PAST_DUE
+  TRIALING
+}

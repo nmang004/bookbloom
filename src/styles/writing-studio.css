@@ -1,0 +1,185 @@
+/* Writing Studio Custom Styles */
+
+/* Focus Mode */
+.focus-mode-container .prose p:not(:focus-within) {
+  opacity: 0.3;
+  transition: opacity 0.3s ease;
+}
+
+.focus-mode-container .prose p:focus-within {
+  opacity: 1;
+}
+
+.focus-mode-container .prose h1:not(:focus-within),
+.focus-mode-container .prose h2:not(:focus-within),
+.focus-mode-container .prose h3:not(:focus-within),
+.focus-mode-container .prose h4:not(:focus-within),
+.focus-mode-container .prose h5:not(:focus-within),
+.focus-mode-container .prose h6:not(:focus-within) {
+  opacity: 0.3;
+  transition: opacity 0.3s ease;
+}
+
+.focus-mode-container .prose h1:focus-within,
+.focus-mode-container .prose h2:focus-within,
+.focus-mode-container .prose h3:focus-within,
+.focus-mode-container .prose h4:focus-within,
+.focus-mode-container .prose h5:focus-within,
+.focus-mode-container .prose h6:focus-within {
+  opacity: 1;
+}
+
+/* Typewriter Mode */
+.typewriter-mode {
+  scroll-behavior: smooth;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100%;
+}
+
+.typewriter-mode .prose {
+  margin: auto 0;
+}
+
+/* Zen Mode */
+.zen-mode .prose {
+  border: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  outline: none !important;
+}
+
+.zen-mode * {
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Dark Mode Prose Adjustments */
+.dark .prose {
+  color: #e2e8f0;
+}
+
+.dark .prose h1,
+.dark .prose h2,
+.dark .prose h3,
+.dark .prose h4,
+.dark .prose h5,
+.dark .prose h6 {
+  color: #f1f5f9;
+}
+
+.dark .prose strong {
+  color: #f1f5f9;
+}
+
+.dark .prose em {
+  color: #cbd5e1;
+}
+
+.dark .prose blockquote {
+  color: #94a3b8;
+  border-left-color: #475569;
+}
+
+/* Writing Animations */
+@keyframes gentle-sway {
+  0%, 100% { transform: rotate(-1deg); }
+  50% { transform: rotate(1deg); }
+}
+
+@keyframes growth {
+  0% { transform: scale(0.98); }
+  100% { transform: scale(1.02); }
+}
+
+@keyframes pre-bloom {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+}
+
+@keyframes bloom-celebration {
+  0% { transform: scale(1) rotate(0deg); }
+  25% { transform: scale(1.05) rotate(1deg); }
+  50% { transform: scale(1.1) rotate(0deg); }
+  75% { transform: scale(1.05) rotate(-1deg); }
+  100% { transform: scale(1) rotate(0deg); }
+}
+
+.animate-gentle-sway {
+  animation: gentle-sway 3s ease-in-out infinite;
+}
+
+.animate-growth {
+  animation: growth 2s ease-in-out infinite alternate;
+}
+
+.animate-pre-bloom {
+  animation: pre-bloom 2s ease-in-out infinite;
+}
+
+.animate-bloom-celebration {
+  animation: bloom-celebration 1.5s ease-in-out;
+}
+
+/* Custom scrollbar for writing areas */
+.writing-scroll::-webkit-scrollbar {
+  width: 8px;
+}
+
+.writing-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.writing-scroll::-webkit-scrollbar-thumb {
+  background: rgba(225, 67, 114, 0.3);
+  border-radius: 4px;
+}
+
+.writing-scroll::-webkit-scrollbar-thumb:hover {
+  background: rgba(225, 67, 114, 0.5);
+}
+
+/* Line numbers for code blocks (if needed) */
+.prose code {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* Enhanced focus states */
+.prose:focus-within {
+  outline: 2px solid rgba(225, 67, 114, 0.3);
+  outline-offset: 4px;
+  border-radius: 8px;
+}
+
+/* Smooth transitions for all interactive elements */
+.writing-studio * {
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+/* Hide focus outline in zen mode */
+.zen-mode *:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Custom selection colors */
+::selection {
+  background: rgba(225, 67, 114, 0.3);
+  color: inherit;
+}
+
+::-moz-selection {
+  background: rgba(225, 67, 114, 0.3);
+  color: inherit;
+}
+
+/* Line clamp utility */
+.line-clamp-3 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
