@@ -21,25 +21,25 @@ export default function HomePage() {
             
             <div className="hidden lg:flex items-center space-x-12">
               <Link 
-                href="#features" 
+                href="/features" 
                 className="text-charcoal-600 hover:text-sakura-600 transition-all duration-150 hover:scale-105 font-medium tech-feedback"
               >
                 Features
               </Link>
               <Link 
-                href="#how-it-works" 
+                href="/how-it-works" 
                 className="text-charcoal-600 hover:text-sakura-600 transition-all duration-150 hover:scale-105 font-medium tech-feedback"
               >
                 How It Works
               </Link>
               <Link 
-                href="#pricing" 
+                href="/pricing" 
                 className="text-charcoal-600 hover:text-sakura-600 transition-all duration-150 hover:scale-105 font-medium tech-feedback"
               >
                 Pricing
               </Link>
               <Link 
-                href="/login" 
+                href="/auth/signin" 
                 className="text-charcoal-600 hover:text-sakura-600 transition-all duration-150 hover:scale-105 font-medium tech-feedback"
               >
                 Sign In
@@ -51,7 +51,7 @@ export default function HomePage() {
                 className="px-6 py-2 font-medium hover:shadow-lg hover:shadow-sakura-200/50 transition-all duration-150 tech-feedback"
                 asChild
               >
-                <Link href="/dashboard">Dashboard</Link>
+                <Link href="/auth/signup">Get Started</Link>
               </Button>
             </div>
             
@@ -109,7 +109,7 @@ export default function HomePage() {
                     className="text-xl px-10 py-5 font-semibold hover:scale-105 hover:shadow-xl hover:shadow-sakura-300/30 transition-all duration-200 tech-feedback"
                     asChild
                   >
-                    <Link href="/dashboard">
+                    <Link href="/auth/signup">
                       Start Your First Chapter
                       <ArrowRight className="ml-3 h-6 w-6" />
                     </Link>
@@ -499,7 +499,7 @@ export default function HomePage() {
                 className="text-xl px-12 py-6 bg-white text-sakura-600 hover:bg-sakura-50 hover:scale-105 font-semibold shadow-xl hover:shadow-2xl transition-all duration-200 tech-feedback"
                 asChild
               >
-                <Link href="/dashboard">
+                <Link href="/auth/signup">
                   Begin Your Journey
                   <ArrowRight className="ml-3 h-6 w-6" />
                 </Link>
@@ -540,8 +540,8 @@ export default function HomePage() {
             <div className="space-y-4">
               <h4 className="font-semibold text-lg">Product</h4>
               <nav className="space-y-3 text-charcoal-300">
-                <Link href="#features" className="block hover:text-white transition-colors duration-150 tech-feedback">Features</Link>
-                <Link href="#pricing" className="block hover:text-white transition-colors duration-150 tech-feedback">Pricing</Link>
+                <Link href="/features" className="block hover:text-white transition-colors duration-150 tech-feedback">Features</Link>
+                <Link href="/pricing" className="block hover:text-white transition-colors duration-150 tech-feedback">Pricing</Link>
                 <Link href="/templates" className="block hover:text-white transition-colors duration-150 tech-feedback">Templates</Link>
               </nav>
             </div>

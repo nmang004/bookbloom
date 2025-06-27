@@ -27,6 +27,7 @@ import dynamic from "next/dynamic"
 import OutlineGenerator from "@/components/outline/OutlineGenerator"
 import { CharacterArchitect } from "@/components/character/CharacterArchitect"
 import { WorldBuildingAtlas } from "@/components/worldbuilding/WorldBuildingAtlas"
+import { SettingsSection } from "@/components/settings/SettingsSection"
 
 // Dynamically import WritingStudio with SSR disabled
 const WritingStudio = dynamic(
@@ -519,17 +520,21 @@ export default function BookWorkbench() {
         // This case is now handled above with full layout control
         return null
       case "settings":
-        return (
-          <div className="text-center py-16">
-            <Settings className="h-16 w-16 text-charcoal-400 mx-auto mb-4" />
-            <h2 className="text-2xl font-bold text-charcoal-900 dark:text-white mb-2">
-              Book Settings
-            </h2>
-            <p className="text-charcoal-600 dark:text-charcoal-400">
-              Export and preference settings coming soon
-            </p>
-          </div>
-        )
+        return <SettingsSection 
+          bookId={bookId}
+          bookTitle={book.title}
+          bookData={{
+            id: bookId,
+            title: book.title,
+            synopsis: book.synopsis,
+            genre: book.genre,
+            status: book.status,
+            wordCount: book.wordCount,
+            targetWordCount: book.targetWordCount,
+            author: "Your Name", // In real app, this would come from user data
+            description: book.description || book.synopsis
+          }}
+        />
       default:
         return <OverviewSection book={book} />
     }

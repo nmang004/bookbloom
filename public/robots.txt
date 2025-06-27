@@ -1,0 +1,15 @@
+User-agent: *
+Allow: /
+
+# Marketing pages
+Allow: /features
+Allow: /how-it-works
+Allow: /pricing
+
+# Block auth pages from search engines
+Disallow: /auth/
+Disallow: /dashboard/
+Disallow: /api/
+
+# Sitemap
+Sitemap: https://bookbloom.app/sitemap.xml

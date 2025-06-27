@@ -6,6 +6,16 @@ interface BaseGenerationRequest {
   type: string
 }
 
+interface BookContext {
+  title: string
+  synopsis: string
+  genre: string
+}
+
+interface CharacterData {
+  [key: string]: unknown
+}
+
 interface SynopsisRequest extends BaseGenerationRequest {
   type: 'synopsis'
   idea: string
@@ -18,11 +28,7 @@ interface OutlineRequest extends BaseGenerationRequest {
   bookId: string
   chapters: number
   structure: string
-  context: {
-    title: string
-    synopsis: string
-    genre: string
-  }
+  context: BookContext
 }
 
 interface CharacterRequest extends BaseGenerationRequest {
@@ -31,22 +37,22 @@ interface CharacterRequest extends BaseGenerationRequest {
   name: string
   role: string
   importance?: string
-  characterData?: any
-  context: any
+  characterData?: CharacterData
+  context: BookContext
 }
 
 interface CharacterEnhancementRequest extends BaseGenerationRequest {
   type: 'character_enhancement'
   characterId: string
   enhancementType: string
-  context: any
+  context: BookContext
 }
 
 interface CharacterAnalysisRequest extends BaseGenerationRequest {
   type: 'character_analysis'
   analysisType: string
-  characters: any[]
-  bookContext?: any
+  characters: CharacterData[]
+  bookContext?: BookContext
 }
 
 interface WorldElementRequest extends BaseGenerationRequest {
@@ -54,20 +60,20 @@ interface WorldElementRequest extends BaseGenerationRequest {
   bookId: string
   elementType: string
   name: string
-  elementData?: any
-  context: any
+  elementData?: CharacterData
+  context: BookContext
 }
 
 interface ChapterGenerationRequest extends BaseGenerationRequest {
   type: 'chapter_generation'
   bookId: string
-  context: any
+  context: BookContext
 }
 
 interface ParagraphContinuationRequest extends BaseGenerationRequest {
   type: 'paragraph_continuation'
   currentText: string
-  context?: any
+  context?: BookContext
 }
 
 interface TextRewriteRequest extends BaseGenerationRequest {
@@ -708,7 +714,7 @@ Make sure this character:
 5. Is memorable and distinctive`
 
     } else if (data.type === 'character_enhancement') {
-      const { characterId, enhancementType, context } = data
+      const { enhancementType, context } = data
       const character = context.character
       const existingCharacters = context.existingCharacters || []
       
