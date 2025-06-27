@@ -1340,10 +1340,10 @@ ${context.tone ? `Tone: ${context.tone}` : ''}
 ${context.style ? `Style: ${context.style}` : ''}
 
 **Characters:**
-${context.characters.map(char => `${char.name}: ${char.description} (Traits: ${char.traits.join(', ')})`).join('\n')}
+${context.characters.map((char: any) => `${char.name}: ${char.description} (Traits: ${char.traits.join(', ')})`).join('\n')}
 
 **World Elements:**
-${context.worldElements?.map(elem => `${elem.name} (${elem.type}): ${elem.description}`).join('\n') || 'None specified'}
+${context.worldElements?.map((elem: any) => `${elem.name} (${elem.type}): ${elem.description}`).join('\n') || 'None specified'}
 
 **Previous Chapter Summary:**
 ${context.previousChapters?.slice(-1)[0]?.summary || 'This is the first chapter of the book.'}
@@ -1417,7 +1417,7 @@ Guidelines:
 
 **Situation:** ${context.situation}
 **Characters:**
-${context.characters.map(char => `${char.name}: ${char.personality} (Voice: ${char.voice})`).join('\n')}
+${context.characters.map((char: any) => `${char.name}: ${char.personality} (Voice: ${char.voice})`).join('\n')}
 
 ${context.tone ? `**Tone:** ${context.tone}` : ''}
 
@@ -1467,10 +1467,10 @@ Guidelines:
 ${text}
 
 **Character Profiles:**
-${context.characters.map(char => `${char.name}: Traits: ${char.traits.join(', ')} | Background: ${char.background}`).join('\n')}
+${context.characters.map((char: any) => `${char.name}: Traits: ${char.traits.join(', ')} | Background: ${char.background}`).join('\n')}
 
 **World Rules:**
-${context.worldElements.map(elem => `${elem.name}: ${elem.rules.join(', ')}`).join('\n')}
+${context.worldElements.map((elem: any) => `${elem.name}: ${elem.rules.join(', ')}`).join('\n')}
 
 Analyze the text for any character or world-building inconsistencies and provide specific feedback with suggestions for improvement.`
 
