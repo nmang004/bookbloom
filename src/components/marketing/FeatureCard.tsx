@@ -1,12 +1,12 @@
 'use client'
 
 import { ReactNode } from 'react'
-import { LucideIcon } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
+import { getIcon, IconName, iconRegistry } from '@/lib/icons'
 
 interface FeatureCardProps {
-  icon: LucideIcon | string
+  iconName: IconName | string
   title: string
   description: string
   features?: string[]
@@ -21,7 +21,7 @@ interface FeatureCardProps {
 }
 
 export function FeatureCard({
-  icon: Icon,
+  iconName,
   title,
   description,
   features = [],
@@ -30,6 +30,7 @@ export function FeatureCard({
   layout = 'default',
   className
 }: FeatureCardProps) {
+  const Icon = typeof iconName === 'string' && iconName in iconRegistry ? getIcon(iconName as IconName) : null
   const isReverse = layout === 'reverse'
 
   return (
@@ -45,10 +46,10 @@ export function FeatureCard({
         {/* Icon and Title */}
         <div className="flex items-center space-x-4">
           <div className="w-16 h-16 bg-sakura-100 dark:bg-sakura-900/20 rounded-2xl flex items-center justify-center zen-lift">
-            {typeof Icon === 'string' ? (
-              <span className="text-2xl">{Icon}</span>
-            ) : (
+            {Icon ? (
               <Icon className="h-8 w-8 text-sakura-500" />
+            ) : (
+              <span className="text-2xl">{iconName}</span>
             )}
           </div>
           <h3 className="text-4xl font-bold text-charcoal-900 dark:text-white">
